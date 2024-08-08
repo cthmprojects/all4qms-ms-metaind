@@ -1,0 +1,99 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (meta()) {
+      <div>
+        <h2 data-cy="metaDetailsHeading"><span>Meta</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>ID</span></dt>
+          <dd>
+            <span>{{ meta()!.id }}</span>
+          </dd>
+          <dt><span>Descricao</span></dt>
+          <dd>
+            <span>{{ meta()!.descricao }}</span>
+          </dd>
+          <dt><span>Indicador</span></dt>
+          <dd>
+            <span>{{ meta()!.indicador }}</span>
+          </dd>
+          <dt><span>Medicao</span></dt>
+          <dd>
+            <span>{{ meta()!.medicao }}</span>
+          </dd>
+          <dt><span>Acao</span></dt>
+          <dd>
+            <span>{{ meta()!.acao }}</span>
+          </dd>
+          <dt><span>Avaliacao Resultado</span></dt>
+          <dd>
+            <span>{{ meta()!.avaliacaoResultado }}</span>
+          </dd>
+          <dt><span>Id Processo</span></dt>
+          <dd>
+            <span>{{ meta()!.idProcesso }}</span>
+          </dd>
+          <dt><span>Monitoramento</span></dt>
+          <dd>
+            <span>{{
+              {
+                null: '',
+                MENSAL: 'Mensal',
+                BIMESTRAL: 'Bimestral',
+                TRIMESTRAL: 'Trimestral',
+                QUADRIMESTRAL: 'Quadrimestral',
+                SEMESTRAL: 'Semestral',
+                ANUAL: 'Anual',
+              }[meta()!.monitoramento ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span>Periodo</span></dt>
+          <dd>
+            <span>{{
+              {
+                null: '',
+                MENSAL: 'Mensal',
+                BIMESTRAL: 'Bimestral',
+                TRIMESTRAL: 'Trimestral',
+                QUADRIMESTRAL: 'Quadrimestral',
+                SEMESTRAL: 'Semestral',
+                ANUAL: 'Anual',
+              }[meta()!.periodo ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span>Recursos</span></dt>
+          <dd>
+            @for (recursos of meta()!.recursos; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/all4qmsmsmetaind/meta-recurso', recursos.id, 'view']">{{ recursos?.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+          <dt><span>Meta Objetivo</span></dt>
+          <dd>
+            @if (meta()!.metaObjetivo) {
+              <div>
+                <a [routerLink]="['/all4qmsmsmetaind/meta-objetivo', meta()!.metaObjetivo?.id, 'view']">{{ meta()!.metaObjetivo?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/all4qmsmsmetaind/meta', meta()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

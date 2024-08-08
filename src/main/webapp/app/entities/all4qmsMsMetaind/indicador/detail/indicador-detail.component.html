@@ -1,0 +1,64 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (indicador()) {
+      <div>
+        <h2 data-cy="indicadorDetailsHeading"><span>Indicador</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>ID</span></dt>
+          <dd>
+            <span>{{ indicador()!.id }}</span>
+          </dd>
+          <dt><span>Codigo Indicador</span></dt>
+          <dd>
+            <span>{{ indicador()!.codigoIndicador }}</span>
+          </dd>
+          <dt><span>Nome Indicador</span></dt>
+          <dd>
+            <span>{{ indicador()!.nomeIndicador }}</span>
+          </dd>
+          <dt><span>Descricao Indicador</span></dt>
+          <dd>
+            <span>{{ indicador()!.descricaoIndicador }}</span>
+          </dd>
+          <dt><span>Unidade</span></dt>
+          <dd>
+            <span>{{
+              { null: '', PERCENTUAL: 'Percentual', MONETARIO: 'Monetário', UNITARIO: 'Unitário', DECIMAL: 'Decimal' }[
+                indicador()!.unidade ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span>Tendencia</span></dt>
+          <dd>
+            <span>{{
+              { null: '', MAIOR: 'Maior_Melhor', MENOR: 'Menor_Melhor', ESTABILIZAR: 'Estabilizar' }[indicador()!.tendencia ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span>Id Processo</span></dt>
+          <dd>
+            <span>{{ indicador()!.idProcesso }}</span>
+          </dd>
+          <dt><span>Id Meta Indicador</span></dt>
+          <dd>
+            <span>{{ indicador()!.idMetaIndicador }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/all4qmsmsmetaind/indicador', indicador()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

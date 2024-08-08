@@ -1,0 +1,120 @@
+<div>
+  <h2 id="page-heading" data-cy="MetaObjetivoHeading">
+    <span>Meta Objetivos</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span>Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-meta-objetivo"
+        [routerLink]="['/all4qmsmsmetaind/meta-objetivo/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span>Create a new Meta Objetivo</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (metaObjetivos?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span>No Meta Objetivos found</span>
+    </div>
+  }
+
+  @if (metaObjetivos && metaObjetivos.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span>ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="politicaSGQ">
+              <div class="d-flex">
+                <span>Politica SGQ</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="desdobramentoSGQ">
+              <div class="d-flex">
+                <span>Desdobramento SGQ</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="objetivoSGQ">
+              <div class="d-flex">
+                <span>Objetivo SGQ</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (metaObjetivo of metaObjetivos; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/all4qmsmsmetaind/meta-objetivo', metaObjetivo.id, 'view']">{{ metaObjetivo.id }}</a>
+              </td>
+              <td>{{ metaObjetivo.politicaSGQ }}</td>
+              <td>{{ metaObjetivo.desdobramentoSGQ }}</td>
+              <td>{{ metaObjetivo.objetivoSGQ }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <button
+                    type="submit"
+                    [routerLink]="['/all4qmsmsmetaind/meta']"
+                    [queryParams]="{ 'filter[metaObjetivoId.in]': metaObjetivo.id }"
+                    class="btn btn-info btn-sm"
+                    data-cy="filterOtherEntityButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline">Show Metas</span>
+                  </button>
+                  <a
+                    [routerLink]="['/all4qmsmsmetaind/meta-objetivo', metaObjetivo.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/all4qmsmsmetaind/meta-objetivo', metaObjetivo.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(metaObjetivo)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

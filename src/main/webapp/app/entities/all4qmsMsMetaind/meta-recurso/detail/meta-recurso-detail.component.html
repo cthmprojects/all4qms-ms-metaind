@@ -1,0 +1,43 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (metaRecurso()) {
+      <div>
+        <h2 data-cy="metaRecursoDetailsHeading"><span>Meta Recurso</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>ID</span></dt>
+          <dd>
+            <span>{{ metaRecurso()!.id }}</span>
+          </dd>
+          <dt><span>Recurso Nome</span></dt>
+          <dd>
+            <span>{{ metaRecurso()!.recursoNome }}</span>
+          </dd>
+          <dt><span>Metas</span></dt>
+          <dd>
+            @for (metas of metaRecurso()!.metas; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/all4qmsmsmetaind/meta', metas.id, 'view']">{{ metas?.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/all4qmsmsmetaind/meta-recurso', metaRecurso()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

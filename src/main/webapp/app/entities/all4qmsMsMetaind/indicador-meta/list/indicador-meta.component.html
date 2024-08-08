@@ -1,0 +1,321 @@
+<div>
+  <h2 id="page-heading" data-cy="IndicadorMetaHeading">
+    <span>Indicador Metas</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span>Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-indicador-meta"
+        [routerLink]="['/all4qmsmsmetaind/indicador-meta/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span>Create a new Indicador Meta</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (indicadorMetas?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span>No Indicador Metas found</span>
+    </div>
+  }
+
+  @if (indicadorMetas && indicadorMetas.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span>ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="frequencia">
+              <div class="d-flex">
+                <span>Frequencia</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="anoIndicador">
+              <div class="d-flex">
+                <span>Ano Indicador</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="meta01">
+              <div class="d-flex">
+                <span>Meta 01</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="meta02">
+              <div class="d-flex">
+                <span>Meta 02</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="meta03">
+              <div class="d-flex">
+                <span>Meta 03</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="meta04">
+              <div class="d-flex">
+                <span>Meta 04</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="meta05">
+              <div class="d-flex">
+                <span>Meta 05</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="meta06">
+              <div class="d-flex">
+                <span>Meta 06</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="meta07">
+              <div class="d-flex">
+                <span>Meta 07</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="meta08">
+              <div class="d-flex">
+                <span>Meta 08</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="meta09">
+              <div class="d-flex">
+                <span>Meta 09</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="meta10">
+              <div class="d-flex">
+                <span>Meta 10</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="meta11">
+              <div class="d-flex">
+                <span>Meta 11</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="meta12">
+              <div class="d-flex">
+                <span>Meta 12</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="medicao01">
+              <div class="d-flex">
+                <span>Medicao 01</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="medicao02">
+              <div class="d-flex">
+                <span>Medicao 02</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="medicao03">
+              <div class="d-flex">
+                <span>Medicao 03</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="medicao04">
+              <div class="d-flex">
+                <span>Medicao 04</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="medicao05">
+              <div class="d-flex">
+                <span>Medicao 05</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="medicao06">
+              <div class="d-flex">
+                <span>Medicao 06</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="medicao07">
+              <div class="d-flex">
+                <span>Medicao 07</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="medicao08">
+              <div class="d-flex">
+                <span>Medicao 08</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="medicao09">
+              <div class="d-flex">
+                <span>Medicao 09</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="medicao10">
+              <div class="d-flex">
+                <span>Medicao 10</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="medicao11">
+              <div class="d-flex">
+                <span>Medicao 11</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="medicao12">
+              <div class="d-flex">
+                <span>Medicao 12</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="indicador.id">
+              <div class="d-flex">
+                <span>Indicador</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (indicadorMeta of indicadorMetas; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/all4qmsmsmetaind/indicador-meta', indicadorMeta.id, 'view']">{{ indicadorMeta.id }}</a>
+              </td>
+              <td>
+                {{
+                  {
+                    null: '',
+                    MENSAL: 'Mensal',
+                    BIMESTRAL: 'Bimestral',
+                    TRIMESTRAL: 'Trimestral',
+                    QUADRIMESTRAL: 'Quadrimestral',
+                    SEMESTRAL: 'Semestral',
+                    ANUAL: 'Anual',
+                  }[indicadorMeta.frequencia ?? 'null']
+                }}
+              </td>
+              <td>{{ indicadorMeta.anoIndicador }}</td>
+              <td>{{ indicadorMeta.meta01 }}</td>
+              <td>{{ indicadorMeta.meta02 }}</td>
+              <td>{{ indicadorMeta.meta03 }}</td>
+              <td>{{ indicadorMeta.meta04 }}</td>
+              <td>{{ indicadorMeta.meta05 }}</td>
+              <td>{{ indicadorMeta.meta06 }}</td>
+              <td>{{ indicadorMeta.meta07 }}</td>
+              <td>{{ indicadorMeta.meta08 }}</td>
+              <td>{{ indicadorMeta.meta09 }}</td>
+              <td>{{ indicadorMeta.meta10 }}</td>
+              <td>{{ indicadorMeta.meta11 }}</td>
+              <td>{{ indicadorMeta.meta12 }}</td>
+              <td>{{ indicadorMeta.medicao01 }}</td>
+              <td>{{ indicadorMeta.medicao02 }}</td>
+              <td>{{ indicadorMeta.medicao03 }}</td>
+              <td>{{ indicadorMeta.medicao04 }}</td>
+              <td>{{ indicadorMeta.medicao05 }}</td>
+              <td>{{ indicadorMeta.medicao06 }}</td>
+              <td>{{ indicadorMeta.medicao07 }}</td>
+              <td>{{ indicadorMeta.medicao08 }}</td>
+              <td>{{ indicadorMeta.medicao09 }}</td>
+              <td>{{ indicadorMeta.medicao10 }}</td>
+              <td>{{ indicadorMeta.medicao11 }}</td>
+              <td>{{ indicadorMeta.medicao12 }}</td>
+              <td>
+                @if (indicadorMeta.indicador) {
+                  <div>
+                    <a [routerLink]="['/all4qmsmsmetaind/indicador', indicadorMeta.indicador.id, 'view']">{{
+                      indicadorMeta.indicador.id
+                    }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/all4qmsmsmetaind/indicador-meta', indicadorMeta.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/all4qmsmsmetaind/indicador-meta', indicadorMeta.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(indicadorMeta)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

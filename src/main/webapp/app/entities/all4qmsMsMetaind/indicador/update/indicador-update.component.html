@@ -1,0 +1,122 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-indicador-heading" data-cy="IndicadorCreateUpdateHeading">Create or edit a Indicador</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_codigoIndicador">Codigo Indicador</label>
+          <input
+            type="text"
+            class="form-control"
+            name="codigoIndicador"
+            id="field_codigoIndicador"
+            data-cy="codigoIndicador"
+            formControlName="codigoIndicador"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_nomeIndicador">Nome Indicador</label>
+          <input
+            type="text"
+            class="form-control"
+            name="nomeIndicador"
+            id="field_nomeIndicador"
+            data-cy="nomeIndicador"
+            formControlName="nomeIndicador"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_descricaoIndicador">Descricao Indicador</label>
+          <input
+            type="text"
+            class="form-control"
+            name="descricaoIndicador"
+            id="field_descricaoIndicador"
+            data-cy="descricaoIndicador"
+            formControlName="descricaoIndicador"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_unidade">Unidade</label>
+          <select class="form-control" name="unidade" formControlName="unidade" id="field_unidade" data-cy="unidade">
+            <option [ngValue]="null"></option>
+            @for (enumUnidadeMedida of enumUnidadeMedidaValues; track $index) {
+              <option [value]="enumUnidadeMedida">
+                {{
+                  { null: '', PERCENTUAL: 'Percentual', MONETARIO: 'Monetário', UNITARIO: 'Unitário', DECIMAL: 'Decimal' }[
+                    enumUnidadeMedida
+                  ]
+                }}
+              </option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_tendencia">Tendencia</label>
+          <select class="form-control" name="tendencia" formControlName="tendencia" id="field_tendencia" data-cy="tendencia">
+            <option [ngValue]="null"></option>
+            @for (enumTendencia of enumTendenciaValues; track $index) {
+              <option [value]="enumTendencia">
+                {{ { null: '', MAIOR: 'Maior_Melhor', MENOR: 'Menor_Melhor', ESTABILIZAR: 'Estabilizar' }[enumTendencia] }}
+              </option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_idProcesso">Id Processo</label>
+          <input
+            type="number"
+            class="form-control"
+            name="idProcesso"
+            id="field_idProcesso"
+            data-cy="idProcesso"
+            formControlName="idProcesso"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_idMetaIndicador">Id Meta Indicador</label>
+          <input
+            type="number"
+            class="form-control"
+            name="idMetaIndicador"
+            id="field_idMetaIndicador"
+            data-cy="idMetaIndicador"
+            formControlName="idMetaIndicador"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

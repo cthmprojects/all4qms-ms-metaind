@@ -1,0 +1,154 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (indicadorMeta()) {
+      <div>
+        <h2 data-cy="indicadorMetaDetailsHeading"><span>Indicador Meta</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>ID</span></dt>
+          <dd>
+            <span>{{ indicadorMeta()!.id }}</span>
+          </dd>
+          <dt><span>Frequencia</span></dt>
+          <dd>
+            <span>{{
+              {
+                null: '',
+                MENSAL: 'Mensal',
+                BIMESTRAL: 'Bimestral',
+                TRIMESTRAL: 'Trimestral',
+                QUADRIMESTRAL: 'Quadrimestral',
+                SEMESTRAL: 'Semestral',
+                ANUAL: 'Anual',
+              }[indicadorMeta()!.frequencia ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span>Ano Indicador</span></dt>
+          <dd>
+            <span>{{ indicadorMeta()!.anoIndicador }}</span>
+          </dd>
+          <dt><span>Meta 01</span></dt>
+          <dd>
+            <span>{{ indicadorMeta()!.meta01 }}</span>
+          </dd>
+          <dt><span>Meta 02</span></dt>
+          <dd>
+            <span>{{ indicadorMeta()!.meta02 }}</span>
+          </dd>
+          <dt><span>Meta 03</span></dt>
+          <dd>
+            <span>{{ indicadorMeta()!.meta03 }}</span>
+          </dd>
+          <dt><span>Meta 04</span></dt>
+          <dd>
+            <span>{{ indicadorMeta()!.meta04 }}</span>
+          </dd>
+          <dt><span>Meta 05</span></dt>
+          <dd>
+            <span>{{ indicadorMeta()!.meta05 }}</span>
+          </dd>
+          <dt><span>Meta 06</span></dt>
+          <dd>
+            <span>{{ indicadorMeta()!.meta06 }}</span>
+          </dd>
+          <dt><span>Meta 07</span></dt>
+          <dd>
+            <span>{{ indicadorMeta()!.meta07 }}</span>
+          </dd>
+          <dt><span>Meta 08</span></dt>
+          <dd>
+            <span>{{ indicadorMeta()!.meta08 }}</span>
+          </dd>
+          <dt><span>Meta 09</span></dt>
+          <dd>
+            <span>{{ indicadorMeta()!.meta09 }}</span>
+          </dd>
+          <dt><span>Meta 10</span></dt>
+          <dd>
+            <span>{{ indicadorMeta()!.meta10 }}</span>
+          </dd>
+          <dt><span>Meta 11</span></dt>
+          <dd>
+            <span>{{ indicadorMeta()!.meta11 }}</span>
+          </dd>
+          <dt><span>Meta 12</span></dt>
+          <dd>
+            <span>{{ indicadorMeta()!.meta12 }}</span>
+          </dd>
+          <dt><span>Medicao 01</span></dt>
+          <dd>
+            <span>{{ indicadorMeta()!.medicao01 }}</span>
+          </dd>
+          <dt><span>Medicao 02</span></dt>
+          <dd>
+            <span>{{ indicadorMeta()!.medicao02 }}</span>
+          </dd>
+          <dt><span>Medicao 03</span></dt>
+          <dd>
+            <span>{{ indicadorMeta()!.medicao03 }}</span>
+          </dd>
+          <dt><span>Medicao 04</span></dt>
+          <dd>
+            <span>{{ indicadorMeta()!.medicao04 }}</span>
+          </dd>
+          <dt><span>Medicao 05</span></dt>
+          <dd>
+            <span>{{ indicadorMeta()!.medicao05 }}</span>
+          </dd>
+          <dt><span>Medicao 06</span></dt>
+          <dd>
+            <span>{{ indicadorMeta()!.medicao06 }}</span>
+          </dd>
+          <dt><span>Medicao 07</span></dt>
+          <dd>
+            <span>{{ indicadorMeta()!.medicao07 }}</span>
+          </dd>
+          <dt><span>Medicao 08</span></dt>
+          <dd>
+            <span>{{ indicadorMeta()!.medicao08 }}</span>
+          </dd>
+          <dt><span>Medicao 09</span></dt>
+          <dd>
+            <span>{{ indicadorMeta()!.medicao09 }}</span>
+          </dd>
+          <dt><span>Medicao 10</span></dt>
+          <dd>
+            <span>{{ indicadorMeta()!.medicao10 }}</span>
+          </dd>
+          <dt><span>Medicao 11</span></dt>
+          <dd>
+            <span>{{ indicadorMeta()!.medicao11 }}</span>
+          </dd>
+          <dt><span>Medicao 12</span></dt>
+          <dd>
+            <span>{{ indicadorMeta()!.medicao12 }}</span>
+          </dd>
+          <dt><span>Indicador</span></dt>
+          <dd>
+            @if (indicadorMeta()!.indicador) {
+              <div>
+                <a [routerLink]="['/all4qmsmsmetaind/indicador', indicadorMeta()!.indicador?.id, 'view']">{{
+                  indicadorMeta()!.indicador?.id
+                }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/all4qmsmsmetaind/indicador-meta', indicadorMeta()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

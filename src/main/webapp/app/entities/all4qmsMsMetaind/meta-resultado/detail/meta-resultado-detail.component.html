@@ -1,0 +1,62 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (metaResultado()) {
+      <div>
+        <h2 data-cy="metaResultadoDetailsHeading"><span>Meta Resultado</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>ID</span></dt>
+          <dd>
+            <span>{{ metaResultado()!.id }}</span>
+          </dd>
+          <dt><span>Lancado Em</span></dt>
+          <dd>
+            <span>{{ metaResultado()!.lancadoEm | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span>Parcial</span></dt>
+          <dd>
+            <span>{{ metaResultado()!.parcial }}</span>
+          </dd>
+          <dt><span>Meta Atingida</span></dt>
+          <dd>
+            <span>{{ metaResultado()!.metaAtingida }}</span>
+          </dd>
+          <dt><span>Periodo</span></dt>
+          <dd>
+            <span>{{ metaResultado()!.periodo | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span>Avaliacao</span></dt>
+          <dd>
+            <span>{{ metaResultado()!.avaliacao }}</span>
+          </dd>
+          <dt><span>Analise</span></dt>
+          <dd>
+            <span>{{ metaResultado()!.analise }}</span>
+          </dd>
+          <dt><span>Meta</span></dt>
+          <dd>
+            @if (metaResultado()!.meta) {
+              <div>
+                <a [routerLink]="['/all4qmsmsmetaind/meta', metaResultado()!.meta?.id, 'view']">{{ metaResultado()!.meta?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/all4qmsmsmetaind/meta-resultado', metaResultado()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

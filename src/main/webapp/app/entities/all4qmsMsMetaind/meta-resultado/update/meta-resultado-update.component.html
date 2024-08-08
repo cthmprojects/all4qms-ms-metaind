@@ -1,0 +1,115 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-meta-resultado-heading" data-cy="MetaResultadoCreateUpdateHeading">Create or edit a Meta Resultado</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_lancadoEm">Lancado Em</label>
+          <div class="d-flex">
+            <input
+              id="field_lancadoEm"
+              data-cy="lancadoEm"
+              type="datetime-local"
+              class="form-control"
+              name="lancadoEm"
+              formControlName="lancadoEm"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_parcial">Parcial</label>
+          <input type="checkbox" class="form-check" name="parcial" id="field_parcial" data-cy="parcial" formControlName="parcial" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_metaAtingida">Meta Atingida</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="metaAtingida"
+            id="field_metaAtingida"
+            data-cy="metaAtingida"
+            formControlName="metaAtingida"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_periodo">Periodo</label>
+          <div class="d-flex">
+            <input
+              id="field_periodo"
+              data-cy="periodo"
+              type="datetime-local"
+              class="form-control"
+              name="periodo"
+              formControlName="periodo"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_avaliacao">Avaliacao</label>
+          <input type="text" class="form-control" name="avaliacao" id="field_avaliacao" data-cy="avaliacao" formControlName="avaliacao" />
+          @if (editForm.get('avaliacao')!.invalid && (editForm.get('avaliacao')!.dirty || editForm.get('avaliacao')!.touched)) {
+            <div>
+              @if (editForm.get('avaliacao')?.errors?.maxlength) {
+                <small class="form-text text-danger">This field cannot be longer than 4000 characters.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_analise">Analise</label>
+          <input type="text" class="form-control" name="analise" id="field_analise" data-cy="analise" formControlName="analise" />
+          @if (editForm.get('analise')!.invalid && (editForm.get('analise')!.dirty || editForm.get('analise')!.touched)) {
+            <div>
+              @if (editForm.get('analise')?.errors?.maxlength) {
+                <small class="form-text text-danger">This field cannot be longer than 4000 characters.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_meta">Meta</label>
+          <select class="form-control" id="field_meta" data-cy="meta" name="meta" formControlName="meta" [compareWith]="compareMeta">
+            <option [ngValue]="null"></option>
+            @for (metaOption of metasSharedCollection; track $index) {
+              <option [ngValue]="metaOption">{{ metaOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

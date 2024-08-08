@@ -1,0 +1,100 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-meta-anexo-heading" data-cy="MetaAnexoCreateUpdateHeading">Create or edit a Meta Anexo</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_nomeFisico">Nome Fisico</label>
+          <input
+            type="text"
+            class="form-control"
+            name="nomeFisico"
+            id="field_nomeFisico"
+            data-cy="nomeFisico"
+            formControlName="nomeFisico"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_nomeOriginal">Nome Original</label>
+          <input
+            type="text"
+            class="form-control"
+            name="nomeOriginal"
+            id="field_nomeOriginal"
+            data-cy="nomeOriginal"
+            formControlName="nomeOriginal"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_extensao">Extensao</label>
+          <input type="text" class="form-control" name="extensao" id="field_extensao" data-cy="extensao" formControlName="extensao" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_caminho">Caminho</label>
+          <input type="text" class="form-control" name="caminho" id="field_caminho" data-cy="caminho" formControlName="caminho" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dataCriacao">Data Criacao</label>
+          <div class="d-flex">
+            <input
+              id="field_dataCriacao"
+              data-cy="dataCriacao"
+              type="datetime-local"
+              class="form-control"
+              name="dataCriacao"
+              formControlName="dataCriacao"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_metaResultado">Meta Resultado</label>
+          <select
+            class="form-control"
+            id="field_metaResultado"
+            data-cy="metaResultado"
+            name="metaResultado"
+            formControlName="metaResultado"
+            [compareWith]="compareMetaResultado"
+          >
+            <option [ngValue]="null"></option>
+            @for (metaResultadoOption of metaResultadosSharedCollection; track $index) {
+              <option [ngValue]="metaResultadoOption">{{ metaResultadoOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

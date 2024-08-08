@@ -1,0 +1,205 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-indicador-meta-heading" data-cy="IndicadorMetaCreateUpdateHeading">Create or edit a Indicador Meta</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_frequencia">Frequencia</label>
+          <select class="form-control" name="frequencia" formControlName="frequencia" id="field_frequencia" data-cy="frequencia">
+            <option [ngValue]="null"></option>
+            @for (enumTemporal of enumTemporalValues; track $index) {
+              <option [value]="enumTemporal">
+                {{
+                  {
+                    null: '',
+                    MENSAL: 'Mensal',
+                    BIMESTRAL: 'Bimestral',
+                    TRIMESTRAL: 'Trimestral',
+                    QUADRIMESTRAL: 'Quadrimestral',
+                    SEMESTRAL: 'Semestral',
+                    ANUAL: 'Anual',
+                  }[enumTemporal]
+                }}
+              </option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_anoIndicador">Ano Indicador</label>
+          <input
+            type="text"
+            class="form-control"
+            name="anoIndicador"
+            id="field_anoIndicador"
+            data-cy="anoIndicador"
+            formControlName="anoIndicador"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_meta01">Meta 01</label>
+          <input type="number" class="form-control" name="meta01" id="field_meta01" data-cy="meta01" formControlName="meta01" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_meta02">Meta 02</label>
+          <input type="number" class="form-control" name="meta02" id="field_meta02" data-cy="meta02" formControlName="meta02" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_meta03">Meta 03</label>
+          <input type="number" class="form-control" name="meta03" id="field_meta03" data-cy="meta03" formControlName="meta03" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_meta04">Meta 04</label>
+          <input type="number" class="form-control" name="meta04" id="field_meta04" data-cy="meta04" formControlName="meta04" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_meta05">Meta 05</label>
+          <input type="number" class="form-control" name="meta05" id="field_meta05" data-cy="meta05" formControlName="meta05" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_meta06">Meta 06</label>
+          <input type="number" class="form-control" name="meta06" id="field_meta06" data-cy="meta06" formControlName="meta06" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_meta07">Meta 07</label>
+          <input type="number" class="form-control" name="meta07" id="field_meta07" data-cy="meta07" formControlName="meta07" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_meta08">Meta 08</label>
+          <input type="number" class="form-control" name="meta08" id="field_meta08" data-cy="meta08" formControlName="meta08" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_meta09">Meta 09</label>
+          <input type="number" class="form-control" name="meta09" id="field_meta09" data-cy="meta09" formControlName="meta09" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_meta10">Meta 10</label>
+          <input type="number" class="form-control" name="meta10" id="field_meta10" data-cy="meta10" formControlName="meta10" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_meta11">Meta 11</label>
+          <input type="number" class="form-control" name="meta11" id="field_meta11" data-cy="meta11" formControlName="meta11" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_meta12">Meta 12</label>
+          <input type="number" class="form-control" name="meta12" id="field_meta12" data-cy="meta12" formControlName="meta12" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_medicao01">Medicao 01</label>
+          <input type="number" class="form-control" name="medicao01" id="field_medicao01" data-cy="medicao01" formControlName="medicao01" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_medicao02">Medicao 02</label>
+          <input type="number" class="form-control" name="medicao02" id="field_medicao02" data-cy="medicao02" formControlName="medicao02" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_medicao03">Medicao 03</label>
+          <input type="number" class="form-control" name="medicao03" id="field_medicao03" data-cy="medicao03" formControlName="medicao03" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_medicao04">Medicao 04</label>
+          <input type="number" class="form-control" name="medicao04" id="field_medicao04" data-cy="medicao04" formControlName="medicao04" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_medicao05">Medicao 05</label>
+          <input type="number" class="form-control" name="medicao05" id="field_medicao05" data-cy="medicao05" formControlName="medicao05" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_medicao06">Medicao 06</label>
+          <input type="number" class="form-control" name="medicao06" id="field_medicao06" data-cy="medicao06" formControlName="medicao06" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_medicao07">Medicao 07</label>
+          <input type="number" class="form-control" name="medicao07" id="field_medicao07" data-cy="medicao07" formControlName="medicao07" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_medicao08">Medicao 08</label>
+          <input type="number" class="form-control" name="medicao08" id="field_medicao08" data-cy="medicao08" formControlName="medicao08" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_medicao09">Medicao 09</label>
+          <input type="number" class="form-control" name="medicao09" id="field_medicao09" data-cy="medicao09" formControlName="medicao09" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_medicao10">Medicao 10</label>
+          <input type="number" class="form-control" name="medicao10" id="field_medicao10" data-cy="medicao10" formControlName="medicao10" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_medicao11">Medicao 11</label>
+          <input type="number" class="form-control" name="medicao11" id="field_medicao11" data-cy="medicao11" formControlName="medicao11" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_medicao12">Medicao 12</label>
+          <input type="number" class="form-control" name="medicao12" id="field_medicao12" data-cy="medicao12" formControlName="medicao12" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_indicador">Indicador</label>
+          <select
+            class="form-control"
+            id="field_indicador"
+            data-cy="indicador"
+            name="indicador"
+            formControlName="indicador"
+            [compareWith]="compareIndicador"
+          >
+            <option [ngValue]="null"></option>
+            @for (indicadorOption of indicadorsSharedCollection; track $index) {
+              <option [ngValue]="indicadorOption">{{ indicadorOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

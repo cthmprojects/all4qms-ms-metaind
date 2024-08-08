@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity IndicadorMeta.
+    -->
+    <changeSet id="20240808011748-1" author="jhipster">
+        <createTable tableName="indicador_meta">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="frequencia" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="ano_indicador" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="meta_01" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="meta_02" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="meta_03" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="meta_04" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="meta_05" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="meta_06" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="meta_07" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="meta_08" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="meta_09" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="meta_10" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="meta_11" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="meta_12" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="medicao_01" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="medicao_02" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="medicao_03" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="medicao_04" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="medicao_05" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="medicao_06" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="medicao_07" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="medicao_08" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="medicao_09" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="medicao_10" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="medicao_11" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="medicao_12" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="indicador_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+        </createTable>
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20240808011748-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/indicador_meta.csv"
+                  separator=";"
+                  tableName="indicador_meta"
+                  usePreparedStatements="true">
+            <column name="id" type="numeric"/>
+            <column name="frequencia" type="string"/>
+            <column name="ano_indicador" type="string"/>
+            <column name="meta_01" type="numeric"/>
+            <column name="meta_02" type="numeric"/>
+            <column name="meta_03" type="numeric"/>
+            <column name="meta_04" type="numeric"/>
+            <column name="meta_05" type="numeric"/>
+            <column name="meta_06" type="numeric"/>
+            <column name="meta_07" type="numeric"/>
+            <column name="meta_08" type="numeric"/>
+            <column name="meta_09" type="numeric"/>
+            <column name="meta_10" type="numeric"/>
+            <column name="meta_11" type="numeric"/>
+            <column name="meta_12" type="numeric"/>
+            <column name="medicao_01" type="numeric"/>
+            <column name="medicao_02" type="numeric"/>
+            <column name="medicao_03" type="numeric"/>
+            <column name="medicao_04" type="numeric"/>
+            <column name="medicao_05" type="numeric"/>
+            <column name="medicao_06" type="numeric"/>
+            <column name="medicao_07" type="numeric"/>
+            <column name="medicao_08" type="numeric"/>
+            <column name="medicao_09" type="numeric"/>
+            <column name="medicao_10" type="numeric"/>
+            <column name="medicao_11" type="numeric"/>
+            <column name="medicao_12" type="numeric"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,147 @@
+<div>
+  <h2 id="page-heading" data-cy="MetaResultadoHeading">
+    <span>Meta Resultados</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span>Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-meta-resultado"
+        [routerLink]="['/all4qmsmsmetaind/meta-resultado/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span>Create a new Meta Resultado</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (metaResultados?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span>No Meta Resultados found</span>
+    </div>
+  }
+
+  @if (metaResultados && metaResultados.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span>ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lancadoEm">
+              <div class="d-flex">
+                <span>Lancado Em</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="parcial">
+              <div class="d-flex">
+                <span>Parcial</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="metaAtingida">
+              <div class="d-flex">
+                <span>Meta Atingida</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="periodo">
+              <div class="d-flex">
+                <span>Periodo</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="avaliacao">
+              <div class="d-flex">
+                <span>Avaliacao</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="analise">
+              <div class="d-flex">
+                <span>Analise</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="meta.id">
+              <div class="d-flex">
+                <span>Meta</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (metaResultado of metaResultados; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/all4qmsmsmetaind/meta-resultado', metaResultado.id, 'view']">{{ metaResultado.id }}</a>
+              </td>
+              <td>{{ metaResultado.lancadoEm | formatMediumDatetime }}</td>
+              <td>{{ metaResultado.parcial }}</td>
+              <td>{{ metaResultado.metaAtingida }}</td>
+              <td>{{ metaResultado.periodo | formatMediumDatetime }}</td>
+              <td>{{ metaResultado.avaliacao }}</td>
+              <td>{{ metaResultado.analise }}</td>
+              <td>
+                @if (metaResultado.meta) {
+                  <div>
+                    <a [routerLink]="['/all4qmsmsmetaind/meta', metaResultado.meta.id, 'view']">{{ metaResultado.meta.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/all4qmsmsmetaind/meta-resultado', metaResultado.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/all4qmsmsmetaind/meta-resultado', metaResultado.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(metaResultado)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

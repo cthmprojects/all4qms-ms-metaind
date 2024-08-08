@@ -1,0 +1,42 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (metaObjetivo()) {
+      <div>
+        <h2 data-cy="metaObjetivoDetailsHeading"><span>Meta Objetivo</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>ID</span></dt>
+          <dd>
+            <span>{{ metaObjetivo()!.id }}</span>
+          </dd>
+          <dt><span>Politica SGQ</span></dt>
+          <dd>
+            <span>{{ metaObjetivo()!.politicaSGQ }}</span>
+          </dd>
+          <dt><span>Desdobramento SGQ</span></dt>
+          <dd>
+            <span>{{ metaObjetivo()!.desdobramentoSGQ }}</span>
+          </dd>
+          <dt><span>Objetivo SGQ</span></dt>
+          <dd>
+            <span>{{ metaObjetivo()!.objetivoSGQ }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/all4qmsmsmetaind/meta-objetivo', metaObjetivo()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>
