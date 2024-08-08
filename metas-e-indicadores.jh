@@ -18,8 +18,8 @@ entity Meta {
 
 entity MetaResultado {
 	lancadoEm Instant
-    parcial Bolean
-    metaAtingida Bolean
+    parcial Boolean
+    metaAtingida Boolean
     periodo Instant //date picker (MMM/YYYY)
     avaliacao String maxlength(4000) //2000 ou mais
     analise String maxlength(4000) //2000 ou mais   
