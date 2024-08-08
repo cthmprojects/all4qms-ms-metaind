@@ -1,0 +1,30 @@
+{
+  "annotations": {
+    "changelogDate": "20240808011745"
+  },
+  "applications": "*",
+  "clientRootFolder": "all4qmsMsMetaind",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "recursoNome",
+      "fieldType": "String"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "all4qmsMsMetaind",
+  "name": "MetaRecurso",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "meta",
+      "otherEntityRelationshipName": "recursos",
+      "relationshipName": "metas",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

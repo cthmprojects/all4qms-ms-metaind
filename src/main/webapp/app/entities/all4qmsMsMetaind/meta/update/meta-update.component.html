@@ -1,0 +1,162 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-meta-heading" data-cy="MetaCreateUpdateHeading">Create or edit a Meta</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_descricao">Descricao</label>
+          <input type="text" class="form-control" name="descricao" id="field_descricao" data-cy="descricao" formControlName="descricao" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_indicador">Indicador</label>
+          <input type="text" class="form-control" name="indicador" id="field_indicador" data-cy="indicador" formControlName="indicador" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_medicao">Medicao</label>
+          <input type="text" class="form-control" name="medicao" id="field_medicao" data-cy="medicao" formControlName="medicao" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_acao">Acao</label>
+          <input type="text" class="form-control" name="acao" id="field_acao" data-cy="acao" formControlName="acao" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_avaliacaoResultado">Avaliacao Resultado</label>
+          <input
+            type="text"
+            class="form-control"
+            name="avaliacaoResultado"
+            id="field_avaliacaoResultado"
+            data-cy="avaliacaoResultado"
+            formControlName="avaliacaoResultado"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_idProcesso">Id Processo</label>
+          <input
+            type="number"
+            class="form-control"
+            name="idProcesso"
+            id="field_idProcesso"
+            data-cy="idProcesso"
+            formControlName="idProcesso"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_monitoramento">Monitoramento</label>
+          <select
+            class="form-control"
+            name="monitoramento"
+            formControlName="monitoramento"
+            id="field_monitoramento"
+            data-cy="monitoramento"
+          >
+            <option [ngValue]="null"></option>
+            @for (enumTemporal of enumTemporalValues; track $index) {
+              <option [value]="enumTemporal">
+                {{
+                  {
+                    null: '',
+                    MENSAL: 'Mensal',
+                    BIMESTRAL: 'Bimestral',
+                    TRIMESTRAL: 'Trimestral',
+                    QUADRIMESTRAL: 'Quadrimestral',
+                    SEMESTRAL: 'Semestral',
+                    ANUAL: 'Anual',
+                  }[enumTemporal]
+                }}
+              </option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_periodo">Periodo</label>
+          <select class="form-control" name="periodo" formControlName="periodo" id="field_periodo" data-cy="periodo">
+            <option [ngValue]="null"></option>
+            @for (enumTemporal of enumTemporalValues; track $index) {
+              <option [value]="enumTemporal">
+                {{
+                  {
+                    null: '',
+                    MENSAL: 'Mensal',
+                    BIMESTRAL: 'Bimestral',
+                    TRIMESTRAL: 'Trimestral',
+                    QUADRIMESTRAL: 'Quadrimestral',
+                    SEMESTRAL: 'Semestral',
+                    ANUAL: 'Anual',
+                  }[enumTemporal]
+                }}
+              </option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="field_recursos">Recursos</label>
+          <select
+            class="form-control"
+            id="field_recursos"
+            data-cy="recursos"
+            multiple
+            name="recursos"
+            formControlName="recursos"
+            [compareWith]="compareMetaRecurso"
+          >
+            @for (metaRecursoOption of metaRecursosSharedCollection; track $index) {
+              <option [ngValue]="metaRecursoOption">{{ metaRecursoOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_metaObjetivo">Meta Objetivo</label>
+          <select
+            class="form-control"
+            id="field_metaObjetivo"
+            data-cy="metaObjetivo"
+            name="metaObjetivo"
+            formControlName="metaObjetivo"
+            [compareWith]="compareMetaObjetivo"
+          >
+            <option [ngValue]="null"></option>
+            @for (metaObjetivoOption of metaObjetivosSharedCollection; track $index) {
+              <option [ngValue]="metaObjetivoOption">{{ metaObjetivoOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

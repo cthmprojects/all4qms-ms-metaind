@@ -1,0 +1,54 @@
+{
+  "annotations": {
+    "changelogDate": "20240808011747"
+  },
+  "applications": "*",
+  "clientRootFolder": "all4qmsMsMetaind",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "codigoIndicador",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "nomeIndicador",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "descricaoIndicador",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "unidade",
+      "fieldType": "EnumUnidadeMedida",
+      "fieldValues": "PERCENTUAL (Percentual),MONETARIO (Monetário),UNITARIO (Unitário),DECIMAL (Decimal)"
+    },
+    {
+      "fieldName": "tendencia",
+      "fieldType": "EnumTendencia",
+      "fieldValues": "MAIOR (Maior_Melhor),MENOR (Menor_Melhor),ESTABILIZAR (Estabilizar)"
+    },
+    {
+      "fieldName": "idProcesso",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "idMetaIndicador",
+      "fieldType": "Integer"
+    }
+  ],
+  "microserviceName": "all4qmsMsMetaind",
+  "name": "Indicador",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "indicadorMeta",
+      "relationshipName": "indicadorMeta",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

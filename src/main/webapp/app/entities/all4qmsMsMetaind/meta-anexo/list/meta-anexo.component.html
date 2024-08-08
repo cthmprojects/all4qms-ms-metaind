@@ -1,0 +1,141 @@
+<div>
+  <h2 id="page-heading" data-cy="MetaAnexoHeading">
+    <span>Meta Anexos</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span>Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-meta-anexo"
+        [routerLink]="['/all4qmsmsmetaind/meta-anexo/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span>Create a new Meta Anexo</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (metaAnexos?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span>No Meta Anexos found</span>
+    </div>
+  }
+
+  @if (metaAnexos && metaAnexos.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span>ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="nomeFisico">
+              <div class="d-flex">
+                <span>Nome Fisico</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="nomeOriginal">
+              <div class="d-flex">
+                <span>Nome Original</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="extensao">
+              <div class="d-flex">
+                <span>Extensao</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="caminho">
+              <div class="d-flex">
+                <span>Caminho</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dataCriacao">
+              <div class="d-flex">
+                <span>Data Criacao</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="metaResultado.id">
+              <div class="d-flex">
+                <span>Meta Resultado</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (metaAnexo of metaAnexos; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/all4qmsmsmetaind/meta-anexo', metaAnexo.id, 'view']">{{ metaAnexo.id }}</a>
+              </td>
+              <td>{{ metaAnexo.nomeFisico }}</td>
+              <td>{{ metaAnexo.nomeOriginal }}</td>
+              <td>{{ metaAnexo.extensao }}</td>
+              <td>{{ metaAnexo.caminho }}</td>
+              <td>{{ metaAnexo.dataCriacao | formatMediumDatetime }}</td>
+              <td>
+                @if (metaAnexo.metaResultado) {
+                  <div>
+                    <a [routerLink]="['/all4qmsmsmetaind/meta-resultado', metaAnexo.metaResultado.id, 'view']">{{
+                      metaAnexo.metaResultado.id
+                    }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/all4qmsmsmetaind/meta-anexo', metaAnexo.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/all4qmsmsmetaind/meta-anexo', metaAnexo.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(metaAnexo)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

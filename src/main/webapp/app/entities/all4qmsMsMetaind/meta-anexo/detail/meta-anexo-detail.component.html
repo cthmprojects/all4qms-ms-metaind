@@ -1,0 +1,60 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (metaAnexo()) {
+      <div>
+        <h2 data-cy="metaAnexoDetailsHeading"><span>Meta Anexo</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>ID</span></dt>
+          <dd>
+            <span>{{ metaAnexo()!.id }}</span>
+          </dd>
+          <dt><span>Nome Fisico</span></dt>
+          <dd>
+            <span>{{ metaAnexo()!.nomeFisico }}</span>
+          </dd>
+          <dt><span>Nome Original</span></dt>
+          <dd>
+            <span>{{ metaAnexo()!.nomeOriginal }}</span>
+          </dd>
+          <dt><span>Extensao</span></dt>
+          <dd>
+            <span>{{ metaAnexo()!.extensao }}</span>
+          </dd>
+          <dt><span>Caminho</span></dt>
+          <dd>
+            <span>{{ metaAnexo()!.caminho }}</span>
+          </dd>
+          <dt><span>Data Criacao</span></dt>
+          <dd>
+            <span>{{ metaAnexo()!.dataCriacao | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span>Meta Resultado</span></dt>
+          <dd>
+            @if (metaAnexo()!.metaResultado) {
+              <div>
+                <a [routerLink]="['/all4qmsmsmetaind/meta-resultado', metaAnexo()!.metaResultado?.id, 'view']">{{
+                  metaAnexo()!.metaResultado?.id
+                }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/all4qmsmsmetaind/meta-anexo', metaAnexo()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>
