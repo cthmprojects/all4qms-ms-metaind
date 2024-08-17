@@ -10,8 +10,24 @@
     <property name="uuidType" value="uuid" dbms="postgresql"/>
     <property name="datetimeType" value="datetime" dbms="postgresql"/>
 
-    <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240809211229_added_entity_Indicador.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240809211329_added_entity_IndicadorMeta.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240809211429_added_entity_Meta.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240809211529_added_entity_MetaAnexo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240809211629_added_entity_MetaObjetivo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240809211729_added_entity_MetaRecurso.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240809211829_added_entity_MetaResultado.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20240809211329_added_entity_constraints_IndicadorMeta.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240809211429_added_entity_constraints_Meta.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240809211529_added_entity_constraints_MetaAnexo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240809211829_added_entity_constraints_MetaResultado.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
-    <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20240809211229_change_entity_Indicador.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240809211329_change_entity_IndicadorMeta.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240809211429_change_entity_Meta.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240809211529_change_entity_MetaAnexo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240809211629_change_entity_MetaObjetivo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240809211729_change_entity_MetaRecurso.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240809211829_change_entity_MetaResultado.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>

@@ -1,0 +1,122 @@
+{
+  "annotations": {
+    "changelogDate": "20240809211329"
+  },
+  "applications": "*",
+  "clientRootFolder": "all4qmsMsMetaInd",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "entityTableName": "indicador_meta",
+  "fields": [
+    {
+      "fieldName": "frequencia",
+      "fieldType": "EnumTemporal",
+      "fieldValues": "MENSAL (Mensal),BIMESTRAL (Bimestral),TRIMESTRAL (Trimestral),QUADRIMESTRAL (Quadrimestral),SEMESTRAL (Semestral),ANUAL (Anual)"
+    },
+    {
+      "fieldName": "anoIndicador",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "meta01",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "meta02",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "meta03",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "meta04",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "meta05",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "meta06",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "meta07",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "meta08",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "meta09",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "meta10",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "meta11",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "meta12",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "medicao01",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "medicao02",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "medicao03",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "medicao04",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "medicao05",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "medicao06",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "medicao07",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "medicao08",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "medicao09",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "medicao10",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "medicao11",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "medicao12",
+      "fieldType": "Double"
+    }
+  ],
+  "microserviceName": "all4qmsMsMetaInd",
+  "name": "IndicadorMeta",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

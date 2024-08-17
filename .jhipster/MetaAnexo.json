@@ -1,0 +1,37 @@
+{
+  "annotations": {
+    "changelogDate": "20240809211529"
+  },
+  "applications": "*",
+  "clientRootFolder": "all4qmsMsMetaInd",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "entityTableName": "meta_anexo",
+  "fields": [
+    {
+      "fieldName": "nomeFisico",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "nomeOriginal",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "extensao",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "caminho",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dataCriacao",
+      "fieldType": "Instant"
+    }
+  ],
+  "microserviceName": "all4qmsMsMetaInd",
+  "name": "MetaAnexo",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

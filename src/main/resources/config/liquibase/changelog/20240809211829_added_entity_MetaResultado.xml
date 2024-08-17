@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity MetaResultado.
+    -->
+    <changeSet id="20240809211829-1" author="jhipster">
+        <createTable tableName="meta_resultado">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="lancado_em" type="${datetimeType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="parcial" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="meta_atingida" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="periodo" type="${datetimeType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="avaliacao" type="varchar(4000)">
+                <constraints nullable="true" />
+            </column>
+            <column name="analise" type="varchar(4000)">
+                <constraints nullable="true" />
+            </column>
+            <column name="meta_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+        </createTable>
+        <dropDefaultValue tableName="meta_resultado" columnName="lancado_em" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="meta_resultado" columnName="periodo" columnDataType="${datetimeType}"/>
+    </changeSet>
+</databaseChangeLog>

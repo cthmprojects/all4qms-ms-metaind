@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity MetaAnexo.
+    -->
+    <changeSet id="20240809211529-1" author="jhipster">
+        <createTable tableName="meta_anexo">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="nome_fisico" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="nome_original" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="extensao" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="caminho" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="data_criacao" type="${datetimeType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="meta_resultado_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+        </createTable>
+        <dropDefaultValue tableName="meta_anexo" columnName="data_criacao" columnDataType="${datetimeType}"/>
+    </changeSet>
+</databaseChangeLog>

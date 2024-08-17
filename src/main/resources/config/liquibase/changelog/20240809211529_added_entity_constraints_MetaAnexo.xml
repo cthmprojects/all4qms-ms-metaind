@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity MetaAnexo.
+    -->
+    <changeSet id="20240809211529-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="meta_resultado_id"
+                                 baseTableName="meta_anexo"
+                                 constraintName="fk_meta_anexo__meta_resultado_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="meta_resultado"
+                                 />
+    </changeSet>
+</databaseChangeLog>

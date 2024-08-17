@@ -25,7 +25,7 @@ eureka:
     prefer-ip-address: true
   client:
     service-url:
-      defaultZone: http://admin:${jhipster.registry.password}@localhost:8761/eureka/
+      defaultZone: ${QMS_REGISTRY_HTTP:http}://admin:${jhipster.registry.password}@${QMS_REGISTRY_HOST:localhost:8761}/eureka/
 
 management:
   zipkin: # Use the "zipkin" Maven profile to have the Spring Cloud Zipkin dependencies
@@ -47,7 +47,7 @@ spring:
       indent-output: true
   cloud:
     config:
-      uri: http://admin:${jhipster.registry.password}@localhost:8761/config
+      uri: ${QMS_REGISTRY_HTTP:http}://admin:${jhipster.registry.password}@${QMS_REGISTRY_HOST:localhost:8761}/config
       # name of the config server's property source (file.yml) that we want to use
       name: all4qmsMsMetaInd
       profile: dev
@@ -55,8 +55,8 @@ spring:
       # it can be set to any label, branch or commit of the configuration source Git repository
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://localhost:5432/all4qmsMsMetaInd
-    username: all4qmsMsMetaInd
+    url: jdbc:postgresql://localhost:5432/all4qmsMsGateway
+    username: all4qmsMsGateway
     password:
     hikari:
       poolName: Hikari

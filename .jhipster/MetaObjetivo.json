@@ -1,0 +1,36 @@
+{
+  "annotations": {
+    "changelogDate": "20240809211629"
+  },
+  "applications": "*",
+  "clientRootFolder": "all4qmsMsMetaInd",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "entityTableName": "meta_objetivo",
+  "fields": [
+    {
+      "fieldName": "politicaSGQ",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "desdobramentoSGQ",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "objetivoSGQ",
+      "fieldType": "String"
+    }
+  ],
+  "microserviceName": "all4qmsMsMetaInd",
+  "name": "MetaObjetivo",
+  "relationships": [
+    {
+      "otherEntityName": "meta",
+      "relationshipName": "metas",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

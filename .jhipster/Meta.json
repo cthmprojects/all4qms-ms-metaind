@@ -1,0 +1,67 @@
+{
+  "annotations": {
+    "changelogDate": "20240809211429"
+  },
+  "applications": "*",
+  "clientRootFolder": "all4qmsMsMetaInd",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "entityTableName": "meta",
+  "fields": [
+    {
+      "fieldName": "descricao",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "indicador",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "medicao",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "acao",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "avaliacaoResultado",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "idProcesso",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "monitoramento",
+      "fieldType": "EnumTemporal",
+      "fieldValues": "MENSAL (Mensal),BIMESTRAL (Bimestral),TRIMESTRAL (Trimestral),QUADRIMESTRAL (Quadrimestral),SEMESTRAL (Semestral),ANUAL (Anual)"
+    },
+    {
+      "fieldName": "periodo",
+      "fieldType": "EnumTemporal",
+      "fieldValues": "MENSAL (Mensal),BIMESTRAL (Bimestral),TRIMESTRAL (Trimestral),QUADRIMESTRAL (Quadrimestral),SEMESTRAL (Semestral),ANUAL (Anual)"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "all4qmsMsMetaInd",
+  "name": "Meta",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "metaResultado",
+      "relationshipName": "resultados",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "metaRecurso",
+      "otherEntityRelationshipName": "metas",
+      "relationshipName": "recursos",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

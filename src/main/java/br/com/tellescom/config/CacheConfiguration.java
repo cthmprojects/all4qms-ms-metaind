@@ -43,6 +43,19 @@ public class CacheConfiguration {
     @Bean
     public JCacheManagerCustomizer cacheManagerCustomizer() {
         return cm -> {
+            createCache(cm, br.com.tellescom.domain.Indicador.class.getName());
+            createCache(cm, br.com.tellescom.domain.Indicador.class.getName() + ".indicadorMetas");
+            createCache(cm, br.com.tellescom.domain.IndicadorMeta.class.getName());
+            createCache(cm, br.com.tellescom.domain.Meta.class.getName());
+            createCache(cm, br.com.tellescom.domain.Meta.class.getName() + ".resultados");
+            createCache(cm, br.com.tellescom.domain.Meta.class.getName() + ".recursos");
+            createCache(cm, br.com.tellescom.domain.MetaAnexo.class.getName());
+            createCache(cm, br.com.tellescom.domain.MetaObjetivo.class.getName());
+            createCache(cm, br.com.tellescom.domain.MetaObjetivo.class.getName() + ".metas");
+            createCache(cm, br.com.tellescom.domain.MetaRecurso.class.getName());
+            createCache(cm, br.com.tellescom.domain.MetaRecurso.class.getName() + ".metas");
+            createCache(cm, br.com.tellescom.domain.MetaResultado.class.getName());
+            createCache(cm, br.com.tellescom.domain.MetaResultado.class.getName() + ".anexos");
             // jhipster-needle-ehcache-add-entry
         };
     }

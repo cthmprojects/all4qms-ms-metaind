@@ -1,0 +1,141 @@
+
+entity MetaObjetivo {
+    politicaSGQ String 
+    desdobramentoSGQ String 
+    objetivoSGQ String
+}
+
+entity Meta {
+	descricao String 
+    indicador String 
+    medicao String    
+    acao String
+    avaliacaoResultado String
+    idProcesso Integer //entity Processo
+    monitoramento EnumTemporal
+    periodo EnumTemporal
+}
+
+entity MetaResultado {
+	lancadoEm Instant
+    parcial Boolean
+    metaAtingida Boolean
+    periodo Instant //date picker (MMM/YYYY)
+    avaliacao String maxlength(4000) //2000 ou mais
+    analise String maxlength(4000) //2000 ou mais   
+}
+
+entity MetaRecurso {
+	recursoNome String
+}
+
+entity MetaAnexo {
+	nomeFisico String,
+    nomeOriginal String,
+    extensao String,
+    caminho String,
+    dataCriacao Instant
+}
+
+// Indicadores
+
+entity Indicador {
+	codigoIndicador String
+    nomeIndicador String
+    descricaoIndicador String
+    
+    unidade EnumUnidadeMedida
+    tendencia EnumTendencia
+    idProcesso Integer //entity Processo
+    
+    idMetaIndicador Integer //entity MetaIndicador
+}
+
+entity IndicadorMeta {
+	frequencia EnumTemporal
+    anoIndicador String
+    meta01 Double
+    meta02 Double
+    meta03 Double
+    meta04 Double
+    meta05 Double
+    meta06 Double
+    meta07 Double
+    meta08 Double
+    meta09 Double
+    meta10 Double
+    meta11 Double
+    meta12 Double    
+    
+    medicao01 Double
+    medicao02 Double
+    medicao03 Double
+    medicao04 Double
+    medicao05 Double
+    medicao06 Double
+    medicao07 Double
+    medicao08 Double
+    medicao09 Double
+    medicao10 Double
+    medicao11 Double
+    medicao12 Double  
+    }
+
+//Listagem de Enums
+enum EnumTemporal {
+    MENSAL("Mensal") //12
+    BIMESTRAL("Bimestral") //6
+    TRIMESTRAL("Trimestral") //4
+    QUADRIMESTRAL("Quadrimestral") //3
+    SEMESTRAL("Semestral") //2 
+    ANUAL("Anual") //1
+}
+
+enum EnumMeses {
+    JAN("Janeiro")
+    FEV("Fevereiro")
+    MAR("Marco")
+    ABR("Abril")
+    MAI("Maio")
+    JUN("Junho")
+    JUL("Julho")
+    AGO("Agosto")
+    SET("Setembro")
+    OUT("Outubro")
+    NOV("Novembro")
+    DEZ("Dezembro")
+}
+
+enum EnumUnidadeMedida{
+    PERCENTUAL("Percentual")
+    MONETARIO("Monetário")
+    UNITARIO("Unitário")
+    DECIMAL("Decimal")
+}
+
+enum EnumTendencia {
+    MAIOR("Maior_Melhor")
+    MENOR("Menor_Melhor")
+    ESTABILIZAR("Estabilizar")
+}
+
+enum EnumEstadoPreenchimento {
+    ATRASADO("Atrasado")
+    EMDIA("Em dia")
+}
+
+relationship OneToMany {
+	MetaObjetivo{metas} to Meta,
+    Meta{resultados} to MetaResultado,
+    MetaResultado{anexos} to MetaAnexo,
+    Indicador{indicadorMeta} to IndicadorMeta
+}
+
+relationship ManyToMany {
+	Meta{recursos} to MetaRecurso{metas}
+}
+
+dto * with mapstruct
+service * with serviceClass
+filter Meta, MetaRecurso
+paginate Meta, MetaRecurso, Indicador with pagination

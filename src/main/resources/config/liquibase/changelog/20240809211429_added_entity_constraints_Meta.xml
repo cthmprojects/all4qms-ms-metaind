@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Meta.
+    -->
+    <changeSet id="20240809211429-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="meta_id"
+                                 baseTableName="rel_meta__recursos"
+                                 constraintName="fk_rel_meta__recursos__meta_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="meta"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="recursos_id"
+                                 baseTableName="rel_meta__recursos"
+                                 constraintName="fk_rel_meta__recursos__recursos_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="meta_recurso"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="meta_objetivo_id"
+                                 baseTableName="meta"
+                                 constraintName="fk_meta__meta_objetivo_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="meta_objetivo"
+                                 />
+    </changeSet>
+</databaseChangeLog>

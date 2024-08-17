@@ -1,0 +1,52 @@
+{
+  "annotations": {
+    "changelogDate": "20240809211829"
+  },
+  "applications": "*",
+  "clientRootFolder": "all4qmsMsMetaInd",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "entityTableName": "meta_resultado",
+  "fields": [
+    {
+      "fieldName": "lancadoEm",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "parcial",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "metaAtingida",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "periodo",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "avaliacao",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "4000"
+    },
+    {
+      "fieldName": "analise",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "4000"
+    }
+  ],
+  "microserviceName": "all4qmsMsMetaInd",
+  "name": "MetaResultado",
+  "relationships": [
+    {
+      "otherEntityName": "metaAnexo",
+      "relationshipName": "anexos",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

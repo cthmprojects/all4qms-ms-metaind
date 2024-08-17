@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="METAIND LOCAL" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="br.com.tellescom.All4QmsMsMetaIndApp" />
+    <module name="all-4-qms-ms-meta-ind" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
