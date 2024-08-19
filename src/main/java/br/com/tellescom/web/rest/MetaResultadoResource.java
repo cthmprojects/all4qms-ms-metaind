@@ -5,8 +5,14 @@ import br.com.tellescom.repository.MetaResultadoRepository;
 import br.com.tellescom.service.MetaResultadoService;
 import br.com.tellescom.service.dto.MetaResultadoDTO;
 import br.com.tellescom.web.rest.errors.BadRequestAlertException;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
+
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -18,6 +24,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
@@ -51,18 +62,37 @@ public class MetaResultadoResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new metaResultadoDTO, or with status {@code 400 (Bad Request)} if the metaResultado has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    @Operation(summary = "Upload de dados e arquivos", description = "Permite enviar um JSON como parte do formulário e arquivos.", requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "JSON que representa o MetaResultadoDTO", required = true, content = @Content(schema = @Schema(implementation = MetaResultadoRequest.class))))
     @PostMapping(value = "", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
-    public ResponseEntity<MetaResultadoDTO> createMetaResultado(@Valid @ModelAttribute MetaResultadoRequest request)
-        throws URISyntaxException {
+    public ResponseEntity<MetaResultadoDTO> createMetaResultado(
+            @RequestPart("metaResultadoDTO") String metaResultadoDTOJson,
+            @RequestPart("anexos") List<MultipartFile> files)
+            throws URISyntaxException {
+        MetaResultadoDTO metaResultadoDTO = convertJsonToMetaResultadoDTO(metaResultadoDTOJson);
+        var request = new MetaResultadoRequest();
+        request.setMetaResultadoDTO(metaResultadoDTO);
+        request.setAnexos(files);
         log.debug("REST request to save MetaResultadoRequest : {}", request);
         if (request.getMetaResultadoDTO().getId() != null) {
-            throw new BadRequestAlertException("A new metaResultado cannot already have an ID", ENTITY_NAME, "idexists");
+            throw new BadRequestAlertException("A new metaResultado cannot already have an ID", ENTITY_NAME,
+                    "idexists");
         }
         MetaResultadoDTO result = metaResultadoService.save(request);
         return ResponseEntity
-            .created(new URI("/api/meta-resultados/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
-            .body(result);
+                .created(new URI("/api/meta-resultados/" + result.getId()))
+                .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME,
+                        result.getId().toString()))
+                .body(result);
+    }
+
+    private MetaResultadoDTO convertJsonToMetaResultadoDTO(String json) {
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.registerModule(new JavaTimeModule());
+            return objectMapper.readValue(json, MetaResultadoDTO.class);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to convert JSON to MetaResultadoDTO", e);
+        }
     }
 
     /**
