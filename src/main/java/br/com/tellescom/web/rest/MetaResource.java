@@ -201,4 +201,18 @@ public class MetaResource {
         log.debug("REST request to get Metas by idMetaObjetivo: {}", id);
         return ResponseEntity.ok(metaService.findAllByIdMetaObjetivo(id));
     }
+
+    /**
+     * {@code GET  /lote} : get all the metas.
+     *
+     * @param MetaDTO  List of Metas.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of metas in body.
+     */
+    @PostMapping("/lote")
+    public ResponseEntity<List<MetaDTO>> createMetasInLote(@RequestBody List<MetaDTO> request) {
+        log.debug("REST save all metas in lote: {}", request);
+        return ResponseEntity.ok(metaService.saveLoteMeta(request));
+    }
+
+
 }

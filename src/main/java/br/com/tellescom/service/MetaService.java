@@ -8,6 +8,7 @@ import br.com.tellescom.repository.MetaResponseRepository;
 import br.com.tellescom.service.dto.MetaDTO;
 import br.com.tellescom.service.mapper.MetaMapper;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -164,5 +165,14 @@ public class MetaService {
             .stream()
             .map(metaMapper::toDto)
             .collect(Collectors.toList());
+    }
+
+    public List<MetaDTO> saveLoteMeta(List<MetaDTO> request) {
+        log.debug("Saving all Metas in Lote");
+        List<MetaDTO> response = new ArrayList<>();
+        request.forEach(metaDTO -> {
+            response.add(save(metaDTO));
+        });
+        return response;
     }
 }
