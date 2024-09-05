@@ -15,8 +15,8 @@ public class MetaTestSamples {
         return new Meta()
             .id(1L)
             .descricao("descricao1")
-            .indicador("indicador1")
-            .medicao("medicao1")
+            .monitoramentoControle("monitoramentoControle1")
+            .descricaoMonitoramentoControle("descricaoMonitoramentoControle1")
             .acao("acao1")
             .avaliacaoResultado("avaliacaoResultado1")
             .idProcesso(1);
@@ -26,8 +26,8 @@ public class MetaTestSamples {
         return new Meta()
             .id(2L)
             .descricao("descricao2")
-            .indicador("indicador2")
-            .medicao("medicao2")
+            .monitoramentoControle("monitoramentoControle2")
+            .descricaoMonitoramentoControle("descricaoMonitoramentoControle2")
             .acao("acao2")
             .avaliacaoResultado("avaliacaoResultado2")
             .idProcesso(2);
@@ -37,8 +37,8 @@ public class MetaTestSamples {
         return new Meta()
             .id(longCount.incrementAndGet())
             .descricao(UUID.randomUUID().toString())
-            .indicador(UUID.randomUUID().toString())
-            .medicao(UUID.randomUUID().toString())
+            .monitoramentoControle(UUID.randomUUID().toString())
+            .descricaoMonitoramentoControle(UUID.randomUUID().toString())
             .acao(UUID.randomUUID().toString())
             .avaliacaoResultado(UUID.randomUUID().toString())
             .idProcesso(intCount.incrementAndGet());

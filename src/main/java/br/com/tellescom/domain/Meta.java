@@ -3,9 +3,11 @@ package br.com.tellescom.domain;
 import br.com.tellescom.domain.enumeration.EnumTemporal;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -32,11 +34,15 @@ public class Meta implements Serializable {
     @Column(name = "descricao")
     private String descricao;
 
-    @Column(name = "indicador")
-    private String indicador;
+    @Column(name = "monitoramento_controle")
+    private String monitoramentoControle;
 
-    @Column(name = "medicao")
-    private String medicao;
+    @Column(name = "descricao_monitoramento_controle")
+    private String descricaoMonitoramentoControle;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "frequencia")
+    private EnumTemporal frequencia;
 
     @Column(name = "acao")
     private String acao;
@@ -57,7 +63,7 @@ public class Meta implements Serializable {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "meta")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "anexos", "meta" }, allowSetters = true)
+    @JsonIgnoreProperties(value = {"anexos", "meta"}, allowSetters = true)
     private Set<MetaResultado> resultados = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -67,11 +73,11 @@ public class Meta implements Serializable {
         inverseJoinColumns = @JoinColumn(name = "recursos_id")
     )
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "metas" }, allowSetters = true)
+    @JsonIgnoreProperties(value = {"metas"}, allowSetters = true)
     private Set<MetaRecurso> recursos = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "metas" }, allowSetters = true)
+    @JsonIgnoreProperties(value = {"metas"}, allowSetters = true)
     private MetaObjetivo metaObjetivo;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -102,30 +108,43 @@ public class Meta implements Serializable {
         this.descricao = descricao;
     }
 
-    public String getIndicador() {
-        return this.indicador;
+    public String getMonitoramentoControle() {
+        return this.monitoramentoControle;
     }
 
-    public Meta indicador(String indicador) {
-        this.setIndicador(indicador);
+    public Meta monitoramentoControle(String monitoramentoControle) {
+        this.setMonitoramentoControle(monitoramentoControle);
         return this;
     }
 
-    public void setIndicador(String indicador) {
-        this.indicador = indicador;
+    public void setMonitoramentoControle(String monitoramentoControle) {
+        this.monitoramentoControle = monitoramentoControle;
     }
 
-    public String getMedicao() {
-        return this.medicao;
+    public String getDescricaoMonitoramentoControle() {
+        return this.descricaoMonitoramentoControle;
     }
 
-    public Meta medicao(String medicao) {
-        this.setMedicao(medicao);
+    public Meta descricaoMonitoramentoControle(String descricaoMonitoramentoControle) {
+        this.setDescricaoMonitoramentoControle(descricaoMonitoramentoControle);
         return this;
     }
 
-    public void setMedicao(String medicao) {
-        this.medicao = medicao;
+    public void setDescricaoMonitoramentoControle(String descricaoMonitoramentoControle) {
+        this.descricaoMonitoramentoControle = descricaoMonitoramentoControle;
+    }
+
+    public EnumTemporal getFrequencia() {
+        return frequencia;
+    }
+
+    public Meta frequencia(EnumTemporal frequencia) {
+        this.setFrequencia(frequencia);
+        return this;
+    }
+
+    public void setFrequencia(EnumTemporal frequencia) {
+        this.frequencia = frequencia;
     }
 
     public String getAcao() {
@@ -285,8 +304,9 @@ public class Meta implements Serializable {
         return "Meta{" +
             "id=" + getId() +
             ", descricao='" + getDescricao() + "'" +
-            ", indicador='" + getIndicador() + "'" +
-            ", medicao='" + getMedicao() + "'" +
+            ", monitoramentoControle='" + getMonitoramentoControle() + "'" +
+            ", descricaoMonitoramentoControle='" + getDescricaoMonitoramentoControle() + "'" +
+            ", frequencia='" + getFrequencia() + "'" +
             ", acao='" + getAcao() + "'" +
             ", avaliacaoResultado='" + getAvaliacaoResultado() + "'" +
             ", idProcesso=" + getIdProcesso() +
