@@ -48,11 +48,11 @@ class MetaResourceIT {
     private static final String DEFAULT_DESCRICAO = "AAAAAAAAAA";
     private static final String UPDATED_DESCRICAO = "BBBBBBBBBB";
 
-    private static final String DEFAULT_INDICADOR = "AAAAAAAAAA";
-    private static final String UPDATED_INDICADOR = "BBBBBBBBBB";
+    private static final String DEFAULT_MONITORAMENTO_CONTROLE = "AAAAAAAAAA";
+    private static final String UPDATED_MONITORAMENTO_CONTROLE = "BBBBBBBBBB";
 
-    private static final String DEFAULT_MEDICAO = "AAAAAAAAAA";
-    private static final String UPDATED_MEDICAO = "BBBBBBBBBB";
+    private static final String DEFAULT_DESCRICAO_MONITORAMENTO_CONTROLE = "AAAAAAAAAA";
+    private static final String UPDATED_DESCRICAO_MONITORAMENTO_CONTROLE = "BBBBBBBBBB";
 
     private static final String DEFAULT_ACAO = "AAAAAAAAAA";
     private static final String UPDATED_ACAO = "BBBBBBBBBB";
@@ -105,8 +105,8 @@ class MetaResourceIT {
     public static Meta createEntity(EntityManager em) {
         Meta meta = new Meta()
             .descricao(DEFAULT_DESCRICAO)
-            .indicador(DEFAULT_INDICADOR)
-            .medicao(DEFAULT_MEDICAO)
+            .monitoramentoControle(DEFAULT_MONITORAMENTO_CONTROLE)
+            .descricaoMonitoramentoControle(DEFAULT_DESCRICAO_MONITORAMENTO_CONTROLE)
             .acao(DEFAULT_ACAO)
             .avaliacaoResultado(DEFAULT_AVALIACAO_RESULTADO)
             .idProcesso(DEFAULT_ID_PROCESSO)
@@ -124,8 +124,8 @@ class MetaResourceIT {
     public static Meta createUpdatedEntity(EntityManager em) {
         Meta meta = new Meta()
             .descricao(UPDATED_DESCRICAO)
-            .indicador(UPDATED_INDICADOR)
-            .medicao(UPDATED_MEDICAO)
+            .monitoramentoControle(UPDATED_MONITORAMENTO_CONTROLE)
+            .descricaoMonitoramentoControle(UPDATED_DESCRICAO_MONITORAMENTO_CONTROLE)
             .acao(UPDATED_ACAO)
             .avaliacaoResultado(UPDATED_AVALIACAO_RESULTADO)
             .idProcesso(UPDATED_ID_PROCESSO)
@@ -154,8 +154,8 @@ class MetaResourceIT {
         assertThat(metaList).hasSize(databaseSizeBeforeCreate + 1);
         Meta testMeta = metaList.get(metaList.size() - 1);
         assertThat(testMeta.getDescricao()).isEqualTo(DEFAULT_DESCRICAO);
-        assertThat(testMeta.getIndicador()).isEqualTo(DEFAULT_INDICADOR);
-        assertThat(testMeta.getMedicao()).isEqualTo(DEFAULT_MEDICAO);
+        assertThat(testMeta.getMonitoramentoControle()).isEqualTo(DEFAULT_MONITORAMENTO_CONTROLE);
+        assertThat(testMeta.getDescricaoMonitoramentoControle()).isEqualTo(DEFAULT_DESCRICAO_MONITORAMENTO_CONTROLE);
         assertThat(testMeta.getAcao()).isEqualTo(DEFAULT_ACAO);
         assertThat(testMeta.getAvaliacaoResultado()).isEqualTo(DEFAULT_AVALIACAO_RESULTADO);
         assertThat(testMeta.getIdProcesso()).isEqualTo(DEFAULT_ID_PROCESSO);
@@ -195,8 +195,8 @@ class MetaResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(meta.getId().intValue())))
             .andExpect(jsonPath("$.[*].descricao").value(hasItem(DEFAULT_DESCRICAO)))
-            .andExpect(jsonPath("$.[*].indicador").value(hasItem(DEFAULT_INDICADOR)))
-            .andExpect(jsonPath("$.[*].medicao").value(hasItem(DEFAULT_MEDICAO)))
+            .andExpect(jsonPath("$.[*].monitoramentoControle").value(hasItem(DEFAULT_MONITORAMENTO_CONTROLE)))
+            .andExpect(jsonPath("$.[*].descricaoMonitoramentoControle").value(hasItem(DEFAULT_DESCRICAO_MONITORAMENTO_CONTROLE)))
             .andExpect(jsonPath("$.[*].acao").value(hasItem(DEFAULT_ACAO)))
             .andExpect(jsonPath("$.[*].avaliacaoResultado").value(hasItem(DEFAULT_AVALIACAO_RESULTADO)))
             .andExpect(jsonPath("$.[*].idProcesso").value(hasItem(DEFAULT_ID_PROCESSO)))
@@ -234,8 +234,8 @@ class MetaResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(meta.getId().intValue()))
             .andExpect(jsonPath("$.descricao").value(DEFAULT_DESCRICAO))
-            .andExpect(jsonPath("$.indicador").value(DEFAULT_INDICADOR))
-            .andExpect(jsonPath("$.medicao").value(DEFAULT_MEDICAO))
+            .andExpect(jsonPath("$.monitoramentoControle").value(DEFAULT_MONITORAMENTO_CONTROLE))
+            .andExpect(jsonPath("$.descricaoMonitoramentoControle").value(DEFAULT_DESCRICAO_MONITORAMENTO_CONTROLE))
             .andExpect(jsonPath("$.acao").value(DEFAULT_ACAO))
             .andExpect(jsonPath("$.avaliacaoResultado").value(DEFAULT_AVALIACAO_RESULTADO))
             .andExpect(jsonPath("$.idProcesso").value(DEFAULT_ID_PROCESSO))
@@ -332,11 +332,11 @@ class MetaResourceIT {
         // Initialize the database
         metaRepository.saveAndFlush(meta);
 
-        // Get all the metaList where indicador equals to DEFAULT_INDICADOR
-        defaultMetaShouldBeFound("indicador.equals=" + DEFAULT_INDICADOR);
+        // Get all the metaList where monitoramentoControle equals to DEFAULT_MONITORAMENTO_CONTROLE
+        defaultMetaShouldBeFound("monitoramentoControle.equals=" + DEFAULT_MONITORAMENTO_CONTROLE);
 
-        // Get all the metaList where indicador equals to UPDATED_INDICADOR
-        defaultMetaShouldNotBeFound("indicador.equals=" + UPDATED_INDICADOR);
+        // Get all the metaList where monitoramentoControle equals to UPDATED_MONITORAMENTO_CONTROLE
+        defaultMetaShouldNotBeFound("monitoramentoControle.equals=" + UPDATED_MONITORAMENTO_CONTROLE);
     }
 
     @Test
@@ -345,11 +345,11 @@ class MetaResourceIT {
         // Initialize the database
         metaRepository.saveAndFlush(meta);
 
-        // Get all the metaList where indicador in DEFAULT_INDICADOR or UPDATED_INDICADOR
-        defaultMetaShouldBeFound("indicador.in=" + DEFAULT_INDICADOR + "," + UPDATED_INDICADOR);
+        // Get all the metaList where monitoramentoControle in DEFAULT_MONITORAMENTO_CONTROLE or UPDATED_MONITORAMENTO_CONTROLE
+        defaultMetaShouldBeFound("monitoramentoControle.in=" + DEFAULT_MONITORAMENTO_CONTROLE + "," + UPDATED_MONITORAMENTO_CONTROLE);
 
-        // Get all the metaList where indicador equals to UPDATED_INDICADOR
-        defaultMetaShouldNotBeFound("indicador.in=" + UPDATED_INDICADOR);
+        // Get all the metaList where monitoramentoControle equals to UPDATED_MONITORAMENTO_CONTROLE
+        defaultMetaShouldNotBeFound("monitoramentoControle.in=" + UPDATED_MONITORAMENTO_CONTROLE);
     }
 
     @Test
@@ -358,11 +358,11 @@ class MetaResourceIT {
         // Initialize the database
         metaRepository.saveAndFlush(meta);
 
-        // Get all the metaList where indicador is not null
-        defaultMetaShouldBeFound("indicador.specified=true");
+        // Get all the metaList where monitoramentoControle is not null
+        defaultMetaShouldBeFound("monitoramentoControle.specified=true");
 
-        // Get all the metaList where indicador is null
-        defaultMetaShouldNotBeFound("indicador.specified=false");
+        // Get all the metaList where monitoramentoControle is null
+        defaultMetaShouldNotBeFound("monitoramentoControle.specified=false");
     }
 
     @Test
@@ -371,11 +371,11 @@ class MetaResourceIT {
         // Initialize the database
         metaRepository.saveAndFlush(meta);
 
-        // Get all the metaList where indicador contains DEFAULT_INDICADOR
-        defaultMetaShouldBeFound("indicador.contains=" + DEFAULT_INDICADOR);
+        // Get all the metaList where monitoramentoControle contains DEFAULT_MONITORAMENTO_CONTROLE
+        defaultMetaShouldBeFound("monitoramentoControle.contains=" + DEFAULT_MONITORAMENTO_CONTROLE);
 
-        // Get all the metaList where indicador contains UPDATED_INDICADOR
-        defaultMetaShouldNotBeFound("indicador.contains=" + UPDATED_INDICADOR);
+        // Get all the metaList where monitoramentoControle contains UPDATED_MONITORAMENTO_CONTROLE
+        defaultMetaShouldNotBeFound("monitoramentoControle.contains=" + UPDATED_MONITORAMENTO_CONTROLE);
     }
 
     @Test
@@ -384,11 +384,11 @@ class MetaResourceIT {
         // Initialize the database
         metaRepository.saveAndFlush(meta);
 
-        // Get all the metaList where indicador does not contain DEFAULT_INDICADOR
-        defaultMetaShouldNotBeFound("indicador.doesNotContain=" + DEFAULT_INDICADOR);
+        // Get all the metaList where monitoramentoControle does not contain DEFAULT_MONITORAMENTO_CONTROLE
+        defaultMetaShouldNotBeFound("monitoramentoControle.doesNotContain=" + DEFAULT_MONITORAMENTO_CONTROLE);
 
-        // Get all the metaList where indicador does not contain UPDATED_INDICADOR
-        defaultMetaShouldBeFound("indicador.doesNotContain=" + UPDATED_INDICADOR);
+        // Get all the metaList where monitoramentoControle does not contain UPDATED_MONITORAMENTO_CONTROLE
+        defaultMetaShouldBeFound("monitoramentoControle.doesNotContain=" + UPDATED_MONITORAMENTO_CONTROLE);
     }
 
     @Test
@@ -397,11 +397,11 @@ class MetaResourceIT {
         // Initialize the database
         metaRepository.saveAndFlush(meta);
 
-        // Get all the metaList where medicao equals to DEFAULT_MEDICAO
-        defaultMetaShouldBeFound("medicao.equals=" + DEFAULT_MEDICAO);
+        // Get all the metaList where descricaoMonitoramentoControle equals to DEFAULT_DESCRICAO_MONITORAMENTO_CONTROLE
+        defaultMetaShouldBeFound("descricaoMonitoramentoControle.equals=" + DEFAULT_DESCRICAO_MONITORAMENTO_CONTROLE);
 
-        // Get all the metaList where medicao equals to UPDATED_MEDICAO
-        defaultMetaShouldNotBeFound("medicao.equals=" + UPDATED_MEDICAO);
+        // Get all the metaList where descricaoMonitoramentoControle equals to UPDATED_DESCRICAO_MONITORAMENTO_CONTROLE
+        defaultMetaShouldNotBeFound("descricaoMonitoramentoControle.equals=" + UPDATED_DESCRICAO_MONITORAMENTO_CONTROLE);
     }
 
     @Test
@@ -410,11 +410,11 @@ class MetaResourceIT {
         // Initialize the database
         metaRepository.saveAndFlush(meta);
 
-        // Get all the metaList where medicao in DEFAULT_MEDICAO or UPDATED_MEDICAO
-        defaultMetaShouldBeFound("medicao.in=" + DEFAULT_MEDICAO + "," + UPDATED_MEDICAO);
+        // Get all the metaList where descricaoMonitoramentoControle in DEFAULT_DESCRICAO_MONITORAMENTO_CONTROLE or UPDATED_DESCRICAO_MONITORAMENTO_CONTROLE
+        defaultMetaShouldBeFound("descricaoMonitoramentoControle.in=" + DEFAULT_DESCRICAO_MONITORAMENTO_CONTROLE + "," + UPDATED_DESCRICAO_MONITORAMENTO_CONTROLE);
 
-        // Get all the metaList where medicao equals to UPDATED_MEDICAO
-        defaultMetaShouldNotBeFound("medicao.in=" + UPDATED_MEDICAO);
+        // Get all the metaList where descricaoMonitoramentoControle equals to UPDATED_DESCRICAO_MONITORAMENTO_CONTROLE
+        defaultMetaShouldNotBeFound("descricaoMonitoramentoControle.in=" + UPDATED_DESCRICAO_MONITORAMENTO_CONTROLE);
     }
 
     @Test
@@ -423,11 +423,11 @@ class MetaResourceIT {
         // Initialize the database
         metaRepository.saveAndFlush(meta);
 
-        // Get all the metaList where medicao is not null
-        defaultMetaShouldBeFound("medicao.specified=true");
+        // Get all the metaList where descricaoMonitoramentoControle is not null
+        defaultMetaShouldBeFound("descricaoMonitoramentoControle.specified=true");
 
-        // Get all the metaList where medicao is null
-        defaultMetaShouldNotBeFound("medicao.specified=false");
+        // Get all the metaList where descricaoMonitoramentoControle is null
+        defaultMetaShouldNotBeFound("descricaoMonitoramentoControle.specified=false");
     }
 
     @Test
@@ -436,11 +436,11 @@ class MetaResourceIT {
         // Initialize the database
         metaRepository.saveAndFlush(meta);
 
-        // Get all the metaList where medicao contains DEFAULT_MEDICAO
-        defaultMetaShouldBeFound("medicao.contains=" + DEFAULT_MEDICAO);
+        // Get all the metaList where descricaoMonitoramentoControle contains DEFAULT_DESCRICAO_MONITORAMENTO_CONTROLE
+        defaultMetaShouldBeFound("descricaoMonitoramentoControle.contains=" + DEFAULT_DESCRICAO_MONITORAMENTO_CONTROLE);
 
-        // Get all the metaList where medicao contains UPDATED_MEDICAO
-        defaultMetaShouldNotBeFound("medicao.contains=" + UPDATED_MEDICAO);
+        // Get all the metaList where descricaoMonitoramentoControle contains UPDATED_DESCRICAO_MONITORAMENTO_CONTROLE
+        defaultMetaShouldNotBeFound("descricaoMonitoramentoControle.contains=" + UPDATED_DESCRICAO_MONITORAMENTO_CONTROLE);
     }
 
     @Test
@@ -449,11 +449,11 @@ class MetaResourceIT {
         // Initialize the database
         metaRepository.saveAndFlush(meta);
 
-        // Get all the metaList where medicao does not contain DEFAULT_MEDICAO
-        defaultMetaShouldNotBeFound("medicao.doesNotContain=" + DEFAULT_MEDICAO);
+        // Get all the metaList where descricaoMonitoramentoControle does not contain DEFAULT_DESCRICAO_MONITORAMENTO_CONTROLE
+        defaultMetaShouldNotBeFound("descricaoMonitoramentoControle.doesNotContain=" + DEFAULT_DESCRICAO_MONITORAMENTO_CONTROLE);
 
-        // Get all the metaList where medicao does not contain UPDATED_MEDICAO
-        defaultMetaShouldBeFound("medicao.doesNotContain=" + UPDATED_MEDICAO);
+        // Get all the metaList where descricaoMonitoramentoControle does not contain UPDATED_DESCRICAO_MONITORAMENTO_CONTROLE
+        defaultMetaShouldBeFound("descricaoMonitoramentoControle.doesNotContain=" + UPDATED_DESCRICAO_MONITORAMENTO_CONTROLE);
     }
 
     @Test
@@ -831,8 +831,8 @@ class MetaResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(meta.getId().intValue())))
             .andExpect(jsonPath("$.[*].descricao").value(hasItem(DEFAULT_DESCRICAO)))
-            .andExpect(jsonPath("$.[*].indicador").value(hasItem(DEFAULT_INDICADOR)))
-            .andExpect(jsonPath("$.[*].medicao").value(hasItem(DEFAULT_MEDICAO)))
+            .andExpect(jsonPath("$.[*].monitoramentoControle").value(hasItem(DEFAULT_MONITORAMENTO_CONTROLE)))
+            .andExpect(jsonPath("$.[*].descricaoMonitoramentoControle").value(hasItem(DEFAULT_DESCRICAO_MONITORAMENTO_CONTROLE)))
             .andExpect(jsonPath("$.[*].acao").value(hasItem(DEFAULT_ACAO)))
             .andExpect(jsonPath("$.[*].avaliacaoResultado").value(hasItem(DEFAULT_AVALIACAO_RESULTADO)))
             .andExpect(jsonPath("$.[*].idProcesso").value(hasItem(DEFAULT_ID_PROCESSO)))
@@ -887,8 +887,8 @@ class MetaResourceIT {
         em.detach(updatedMeta);
         updatedMeta
             .descricao(UPDATED_DESCRICAO)
-            .indicador(UPDATED_INDICADOR)
-            .medicao(UPDATED_MEDICAO)
+            .monitoramentoControle(UPDATED_MONITORAMENTO_CONTROLE)
+            .descricaoMonitoramentoControle(UPDATED_DESCRICAO_MONITORAMENTO_CONTROLE)
             .acao(UPDATED_ACAO)
             .avaliacaoResultado(UPDATED_AVALIACAO_RESULTADO)
             .idProcesso(UPDATED_ID_PROCESSO)
@@ -909,8 +909,8 @@ class MetaResourceIT {
         assertThat(metaList).hasSize(databaseSizeBeforeUpdate);
         Meta testMeta = metaList.get(metaList.size() - 1);
         assertThat(testMeta.getDescricao()).isEqualTo(UPDATED_DESCRICAO);
-        assertThat(testMeta.getIndicador()).isEqualTo(UPDATED_INDICADOR);
-        assertThat(testMeta.getMedicao()).isEqualTo(UPDATED_MEDICAO);
+        assertThat(testMeta.getMonitoramentoControle()).isEqualTo(UPDATED_MONITORAMENTO_CONTROLE);
+        assertThat(testMeta.getDescricaoMonitoramentoControle()).isEqualTo(UPDATED_DESCRICAO_MONITORAMENTO_CONTROLE);
         assertThat(testMeta.getAcao()).isEqualTo(UPDATED_ACAO);
         assertThat(testMeta.getAvaliacaoResultado()).isEqualTo(UPDATED_AVALIACAO_RESULTADO);
         assertThat(testMeta.getIdProcesso()).isEqualTo(UPDATED_ID_PROCESSO);
@@ -995,7 +995,7 @@ class MetaResourceIT {
         Meta partialUpdatedMeta = new Meta();
         partialUpdatedMeta.setId(meta.getId());
 
-        partialUpdatedMeta.indicador(UPDATED_INDICADOR).medicao(UPDATED_MEDICAO).idProcesso(UPDATED_ID_PROCESSO);
+        partialUpdatedMeta.monitoramentoControle(UPDATED_MONITORAMENTO_CONTROLE).descricaoMonitoramentoControle(UPDATED_DESCRICAO_MONITORAMENTO_CONTROLE).idProcesso(UPDATED_ID_PROCESSO);
 
         restMetaMockMvc
             .perform(
@@ -1010,8 +1010,8 @@ class MetaResourceIT {
         assertThat(metaList).hasSize(databaseSizeBeforeUpdate);
         Meta testMeta = metaList.get(metaList.size() - 1);
         assertThat(testMeta.getDescricao()).isEqualTo(DEFAULT_DESCRICAO);
-        assertThat(testMeta.getIndicador()).isEqualTo(UPDATED_INDICADOR);
-        assertThat(testMeta.getMedicao()).isEqualTo(UPDATED_MEDICAO);
+        assertThat(testMeta.getMonitoramentoControle()).isEqualTo(UPDATED_MONITORAMENTO_CONTROLE);
+        assertThat(testMeta.getDescricaoMonitoramentoControle()).isEqualTo(UPDATED_DESCRICAO_MONITORAMENTO_CONTROLE);
         assertThat(testMeta.getAcao()).isEqualTo(DEFAULT_ACAO);
         assertThat(testMeta.getAvaliacaoResultado()).isEqualTo(DEFAULT_AVALIACAO_RESULTADO);
         assertThat(testMeta.getIdProcesso()).isEqualTo(UPDATED_ID_PROCESSO);
@@ -1033,8 +1033,8 @@ class MetaResourceIT {
 
         partialUpdatedMeta
             .descricao(UPDATED_DESCRICAO)
-            .indicador(UPDATED_INDICADOR)
-            .medicao(UPDATED_MEDICAO)
+            .monitoramentoControle(UPDATED_MONITORAMENTO_CONTROLE)
+            .descricaoMonitoramentoControle(UPDATED_DESCRICAO_MONITORAMENTO_CONTROLE)
             .acao(UPDATED_ACAO)
             .avaliacaoResultado(UPDATED_AVALIACAO_RESULTADO)
             .idProcesso(UPDATED_ID_PROCESSO)
@@ -1054,8 +1054,8 @@ class MetaResourceIT {
         assertThat(metaList).hasSize(databaseSizeBeforeUpdate);
         Meta testMeta = metaList.get(metaList.size() - 1);
         assertThat(testMeta.getDescricao()).isEqualTo(UPDATED_DESCRICAO);
-        assertThat(testMeta.getIndicador()).isEqualTo(UPDATED_INDICADOR);
-        assertThat(testMeta.getMedicao()).isEqualTo(UPDATED_MEDICAO);
+        assertThat(testMeta.getMonitoramentoControle()).isEqualTo(UPDATED_MONITORAMENTO_CONTROLE);
+        assertThat(testMeta.getDescricaoMonitoramentoControle()).isEqualTo(UPDATED_DESCRICAO_MONITORAMENTO_CONTROLE);
         assertThat(testMeta.getAcao()).isEqualTo(UPDATED_ACAO);
         assertThat(testMeta.getAvaliacaoResultado()).isEqualTo(UPDATED_AVALIACAO_RESULTADO);
         assertThat(testMeta.getIdProcesso()).isEqualTo(UPDATED_ID_PROCESSO);
