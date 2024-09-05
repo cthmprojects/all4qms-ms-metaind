@@ -1,16 +1,21 @@
 package br.com.tellescom.service;
 
 import br.com.tellescom.domain.Indicador;
+import br.com.tellescom.domain.request.GraficoIndicadorRequest;
+import br.com.tellescom.domain.response.graficos.BaseGraficoIndicadorResponse;
+import br.com.tellescom.domain.response.graficos.GraficoIndicadorResponse;
+import br.com.tellescom.domain.response.graficos.QualidadeProducaoIndicadorResponse;
 import br.com.tellescom.repository.IndicadorRepository;
 import br.com.tellescom.service.dto.IndicadorDTO;
 import br.com.tellescom.service.mapper.IndicadorMapper;
-import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 /**
  * Service Implementation for managing {@link br.com.tellescom.domain.Indicador}.
@@ -108,5 +113,60 @@ public class IndicadorService {
     public void delete(Long id) {
         log.debug("Request to delete Indicador : {}", id);
         indicadorRepository.deleteById(id);
+    }
+
+    public GraficoIndicadorResponse graficoMetasPorProcesso(GraficoIndicadorRequest request) {
+
+        GraficoIndicadorResponse metasPorProcesso = new GraficoIndicadorResponse();
+        metasPorProcesso.setIdProcesso(request.getIdProcesso());
+        metasPorProcesso.setIdIndicador(request.getIdIndicador());
+        metasPorProcesso.setAnoIndicador(request.getAnoIndicador());
+
+
+        return metasPorProcesso;
+    }
+
+    public QualidadeProducaoIndicadorResponse graficoQualidadeGeralProducao(GraficoIndicadorRequest request) {
+
+        QualidadeProducaoIndicadorResponse qualidadeProducao = new QualidadeProducaoIndicadorResponse();
+        qualidadeProducao.setIdProcesso(request.getIdProcesso());
+        qualidadeProducao.setIdIndicador(request.getIdIndicador());
+        qualidadeProducao.setAnoIndicador(request.getAnoIndicador());
+
+
+        return qualidadeProducao;
+    }
+
+    public GraficoIndicadorResponse graficoPreenchimentoIndicadores(GraficoIndicadorRequest request) {
+
+        GraficoIndicadorResponse preenchimentoIndicadores = new GraficoIndicadorResponse();
+        preenchimentoIndicadores.setIdProcesso(request.getIdProcesso());
+        preenchimentoIndicadores.setIdIndicador(request.getIdIndicador());
+        preenchimentoIndicadores.setAnoIndicador(request.getAnoIndicador());
+
+
+        return preenchimentoIndicadores;
+    }
+
+    public GraficoIndicadorResponse graficoMetasPorPeriodo(GraficoIndicadorRequest request) {
+
+        GraficoIndicadorResponse metasPeriodo = new GraficoIndicadorResponse();
+        metasPeriodo.setIdProcesso(request.getIdProcesso());
+        metasPeriodo.setIdIndicador(request.getIdIndicador());
+        metasPeriodo.setAnoIndicador(request.getAnoIndicador());
+
+
+        return metasPeriodo;
+    }
+
+    public GraficoIndicadorResponse graficoComparacaoPeriodos(GraficoIndicadorRequest request) {
+
+        GraficoIndicadorResponse comparacaoPeriodos = new GraficoIndicadorResponse();
+        comparacaoPeriodos.setIdProcesso(request.getIdProcesso());
+        comparacaoPeriodos.setIdIndicador(request.getIdIndicador());
+        comparacaoPeriodos.setAnoIndicador(request.getAnoIndicador());
+
+
+        return comparacaoPeriodos;
     }
 }
