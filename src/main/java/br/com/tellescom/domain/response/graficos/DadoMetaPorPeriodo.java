@@ -1,12 +1,14 @@
 package br.com.tellescom.domain.response.graficos;
 
-public class DadoMetaPorPeriodo implements DadosGraficoIndicador{
+public class DadoMetaPorPeriodo implements DadosGraficoIndicador {
 
     private String unidadeTemporal;
 
-    private float meta;
+    private String unidadeMedida;
 
-    private float realizado;
+    private Double meta;
+
+    private Double realizado;
 
     public String getUnidadeTemporal() {
         return unidadeTemporal;
@@ -16,19 +18,27 @@ public class DadoMetaPorPeriodo implements DadosGraficoIndicador{
         this.unidadeTemporal = unidadeTemporal;
     }
 
-    public float getMeta() {
+    public Double getMeta() {
         return meta;
     }
 
-    public void setMeta(float meta) {
+    public void setMeta(Double meta) {
         this.meta = meta;
     }
 
-    public float getRealizado() {
+    public Double getRealizado() {
         return realizado;
     }
 
-    public void setRealizado(float realizado) {
+    public void setRealizado(Double realizado) {
         this.realizado = realizado;
+    }
+
+    public String getUnidadeMedida() {
+        return unidadeMedida;
+    }
+
+    public void setUnidadeMedida(String unidadeMedida) {
+        this.unidadeMedida = unidadeMedida;
     }
 }

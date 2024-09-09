@@ -1,10 +1,14 @@
 package br.com.tellescom.service;
 
 import br.com.tellescom.domain.Indicador;
+import br.com.tellescom.domain.IndicadorMeta;
+import br.com.tellescom.domain.enumeration.EnumTemporal;
 import br.com.tellescom.domain.request.GraficoIndicadorRequest;
 import br.com.tellescom.domain.response.graficos.BaseGraficoIndicadorResponse;
+import br.com.tellescom.domain.response.graficos.DadoMetaPorPeriodo;
 import br.com.tellescom.domain.response.graficos.GraficoIndicadorResponse;
 import br.com.tellescom.domain.response.graficos.QualidadeProducaoIndicadorResponse;
+import br.com.tellescom.repository.IndicadorMetaRepository;
 import br.com.tellescom.repository.IndicadorRepository;
 import br.com.tellescom.service.dto.IndicadorDTO;
 import br.com.tellescom.service.mapper.IndicadorMapper;
@@ -15,6 +19,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 /**
@@ -28,10 +33,14 @@ public class IndicadorService {
 
     private final IndicadorRepository indicadorRepository;
 
+
+    private final IndicadorMetaRepository indicadorMetaRepository;
+
     private final IndicadorMapper indicadorMapper;
 
-    public IndicadorService(IndicadorRepository indicadorRepository, IndicadorMapper indicadorMapper) {
+    public IndicadorService(IndicadorRepository indicadorRepository, IndicadorMetaRepository indicadorMetaRepository, IndicadorMapper indicadorMapper) {
         this.indicadorRepository = indicadorRepository;
+        this.indicadorMetaRepository = indicadorMetaRepository;
         this.indicadorMapper = indicadorMapper;
     }
 
@@ -121,9 +130,52 @@ public class IndicadorService {
         metasPorProcesso.setIdProcesso(request.getIdProcesso());
         metasPorProcesso.setIdIndicador(request.getIdIndicador());
         metasPorProcesso.setAnoIndicador(request.getAnoIndicador());
+        metasPorProcesso.setDados(new ArrayList<>());
 
+        Optional<IndicadorMeta> metaOpt = indicadorMetaRepository.findByIndicadorAndAnoIndicadorAndProcesso(
+            request.getIdIndicador(),
+            request.getIdProcesso(),
+            String.valueOf(request.getAnoIndicador())
+        );
+
+        IndicadorMeta indicadorMeta = metaOpt.orElse(null);
+        if (indicadorMeta != null) {
+
+            int dividendo = getDividendo(indicadorMeta.getFrequencia());
+
+
+
+        }
 
         return metasPorProcesso;
+    }
+
+    private int getDividendo(EnumTemporal frequencia) {
+
+        int dividendo;
+
+        switch (frequencia) {
+            case MENSAL -> {
+                dividendo = 12;
+            }
+            case BIMESTRAL -> {
+                dividendo = 2;
+            }
+            case TRIMESTRAL -> {
+                dividendo = 3;
+            }
+            case QUADRIMESTRAL -> {
+                dividendo = 4;
+            }
+            case SEMESTRAL -> {
+                dividendo = 6;
+            }
+            default -> {
+                dividendo = 1;
+            }
+        }
+
+        return dividendo;
     }
 
     public QualidadeProducaoIndicadorResponse graficoQualidadeGeralProducao(GraficoIndicadorRequest request) {
@@ -154,7 +206,32 @@ public class IndicadorService {
         metasPeriodo.setIdProcesso(request.getIdProcesso());
         metasPeriodo.setIdIndicador(request.getIdIndicador());
         metasPeriodo.setAnoIndicador(request.getAnoIndicador());
+        metasPeriodo.setDados(new ArrayList<>());
 
+        Optional<IndicadorMeta> metaOpt = indicadorMetaRepository.findByIndicadorAndAnoIndicadorAndProcesso(
+            request.getIdIndicador(),
+            request.getIdProcesso(),
+            String.valueOf(request.getAnoIndicador())
+        );
+
+        IndicadorMeta indicadorMeta = metaOpt.orElse(null);
+        if (indicadorMeta != null) {
+
+            int dividendo = getDividendo(indicadorMeta.getFrequencia());
+
+            for (int i = 0; i < dividendo; i++) {
+
+                DadoMetaPorPeriodo dadoMetaPorPeriodo = new DadoMetaPorPeriodo();
+
+                dadoMetaPorPeriodo.setMeta(indicadorMeta.getMeta(i+1));
+                dadoMetaPorPeriodo.setRealizado(indicadorMeta.getMedicao(i+1));
+                dadoMetaPorPeriodo.setUnidadeTemporal(indicadorMeta.getFrequencia().getValue());
+                dadoMetaPorPeriodo.setUnidadeMedida(indicadorMeta.getIndicador().getUnidade().getValue());
+
+                metasPeriodo.getDados().add(dadoMetaPorPeriodo);
+            }
+
+        }
 
         return metasPeriodo;
     }
