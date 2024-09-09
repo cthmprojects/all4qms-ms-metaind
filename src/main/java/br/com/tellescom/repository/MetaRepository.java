@@ -27,4 +27,6 @@ public interface MetaRepository extends MetaRepositoryWithBagRelationships, JpaR
     default Page<Meta> findAllWithEagerRelationships(Pageable pageable) {
         return this.fetchBagRelationships(this.findAll(pageable));
     }
+
+    List<Meta> findAllByMetaObjetivoId(Long id);
 }

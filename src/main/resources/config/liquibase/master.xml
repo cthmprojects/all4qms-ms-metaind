@@ -30,4 +30,6 @@
     <include file="config/liquibase/changelog/20240809211629_change_entity_MetaObjetivo.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20240809211729_change_entity_MetaRecurso.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20240809211829_change_entity_MetaResultado.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240809211429_change_v2_entity_Meta.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240809211429_change_v3_entity_Meta.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>

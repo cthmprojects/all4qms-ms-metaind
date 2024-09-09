@@ -1,6 +1,7 @@
 package br.com.tellescom.service.dto;
 
 import br.com.tellescom.domain.enumeration.EnumTemporal;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
@@ -16,9 +17,11 @@ public class MetaDTO implements Serializable {
 
     private String descricao;
 
-    private String indicador;
+    private String monitoramentoControle;
 
-    private String medicao;
+    private String descricaoMonitoramentoControle;
+
+    private EnumTemporal frequencia;
 
     private String acao;
 
@@ -50,20 +53,28 @@ public class MetaDTO implements Serializable {
         this.descricao = descricao;
     }
 
-    public String getIndicador() {
-        return indicador;
+    public String getMonitoramentoControle() {
+        return monitoramentoControle;
     }
 
-    public void setIndicador(String indicador) {
-        this.indicador = indicador;
+    public void setMonitoramentoControle(String monitoramentoControle) {
+        this.monitoramentoControle = monitoramentoControle;
     }
 
-    public String getMedicao() {
-        return medicao;
+    public EnumTemporal getFrequencia() {
+        return frequencia;
     }
 
-    public void setMedicao(String medicao) {
-        this.medicao = medicao;
+    public void setFrequencia(EnumTemporal frequencia) {
+        this.frequencia = frequencia;
+    }
+
+    public String getDescricaoMonitoramentoControle() {
+        return descricaoMonitoramentoControle;
+    }
+
+    public void setDescricaoMonitoramentoControle(String descricaoMonitoramentoControle) {
+        this.descricaoMonitoramentoControle = descricaoMonitoramentoControle;
     }
 
     public String getAcao() {
@@ -149,8 +160,8 @@ public class MetaDTO implements Serializable {
         return "MetaDTO{" +
             "id=" + getId() +
             ", descricao='" + getDescricao() + "'" +
-            ", indicador='" + getIndicador() + "'" +
-            ", medicao='" + getMedicao() + "'" +
+            ", monitoramentoControler='" + getMonitoramentoControle()+ "'" +
+            ", descricaoMonitoramentoControle='" + getDescricaoMonitoramentoControle() + "'" +
             ", acao='" + getAcao() + "'" +
             ", avaliacaoResultado='" + getAvaliacaoResultado() + "'" +
             ", idProcesso=" + getIdProcesso() +

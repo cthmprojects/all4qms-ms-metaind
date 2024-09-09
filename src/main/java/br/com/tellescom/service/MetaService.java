@@ -7,7 +7,12 @@ import br.com.tellescom.repository.MetaRepository;
 import br.com.tellescom.repository.MetaResponseRepository;
 import br.com.tellescom.service.dto.MetaDTO;
 import br.com.tellescom.service.mapper.MetaMapper;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -152,5 +157,22 @@ public class MetaService {
             metaParcial,
             pageable
         );
+    }
+
+    public List<MetaDTO> findAllByIdMetaObjetivo(Long id) {
+        log.debug("Request to find all Meta by MetaObjetivo : {}", id);
+        return metaRepository.findAllByMetaObjetivoId(id)
+            .stream()
+            .map(metaMapper::toDto)
+            .collect(Collectors.toList());
+    }
+
+    public List<MetaDTO> saveLoteMeta(List<MetaDTO> request) {
+        log.debug("Saving all Metas in Lote");
+        List<MetaDTO> response = new ArrayList<>();
+        request.forEach(metaDTO -> {
+            response.add(save(metaDTO));
+        });
+        return response;
     }
 }

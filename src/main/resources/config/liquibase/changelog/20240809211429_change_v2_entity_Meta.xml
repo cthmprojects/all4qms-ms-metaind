@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="20240809211429-4" author="victor">
+        <!-- Renomeia o campo 'indicador' para 'monitoramento_controle' -->
+        <renameColumn tableName="meta"
+                      oldColumnName="indicador"
+                      newColumnName="monitoramento_controle"
+                      columnDataType="varchar(255)" />
+
+        <!-- Renomeia o campo 'medicao' para 'descricao_monitoramento_controle' e altera o tipo para varchar(4000) -->
+        <renameColumn tableName="meta"
+                      oldColumnName="medicao"
+                      newColumnName="descricao_monitoramento_controle"
+                      columnDataType="varchar(4000)" />
+
+        <!-- Adiciona um novo campo 'frequencia' do tipo varchar(255), nullable -->
+        <addColumn tableName="meta">
+            <column name="frequencia" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>
