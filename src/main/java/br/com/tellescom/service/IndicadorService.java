@@ -4,10 +4,7 @@ import br.com.tellescom.domain.Indicador;
 import br.com.tellescom.domain.IndicadorMeta;
 import br.com.tellescom.domain.enumeration.EnumTemporal;
 import br.com.tellescom.domain.request.GraficoIndicadorRequest;
-import br.com.tellescom.domain.response.graficos.BaseGraficoIndicadorResponse;
-import br.com.tellescom.domain.response.graficos.DadoMetaPorPeriodo;
-import br.com.tellescom.domain.response.graficos.GraficoIndicadorResponse;
-import br.com.tellescom.domain.response.graficos.QualidadeProducaoIndicadorResponse;
+import br.com.tellescom.domain.response.graficos.*;
 import br.com.tellescom.repository.IndicadorMetaRepository;
 import br.com.tellescom.repository.IndicadorRepository;
 import br.com.tellescom.service.dto.IndicadorDTO;
@@ -144,7 +141,6 @@ public class IndicadorService {
             int dividendo = getDividendo(indicadorMeta.getFrequencia());
 
 
-
         }
 
         return metasPorProcesso;
@@ -185,8 +181,30 @@ public class IndicadorService {
         qualidadeProducao.setIdIndicador(request.getIdIndicador());
         qualidadeProducao.setAnoIndicador(request.getAnoIndicador());
 
+        Optional<IndicadorMeta> metaOpt = indicadorMetaRepository.findByIndicadorAndAnoIndicadorAndProcesso(
+            request.getIdIndicador(),
+            request.getIdProcesso(),
+            String.valueOf(request.getAnoIndicador())
+        );
 
-        return qualidadeProducao;
+        IndicadorMeta indicadorMeta = metaOpt.orElse(null);
+
+        qualidadeProducao.setFrequencia(indicadorMeta != null ? indicadorMeta.getFrequencia().getValue() : "");
+        qualidadeProducao.setTipo(indicadorMeta != null ? indicadorMeta.getIndicador().getUnidade().getValue() : "");
+
+        if (indicadorMeta != null) {
+            int dividendo = getDividendo(indicadorMeta.getFrequencia());
+
+            for (int i = 0; i < dividendo; i++) {
+
+
+
+            }
+
+        }
+
+
+            return qualidadeProducao;
     }
 
     public GraficoIndicadorResponse graficoPreenchimentoIndicadores(GraficoIndicadorRequest request) {
@@ -215,6 +233,10 @@ public class IndicadorService {
         );
 
         IndicadorMeta indicadorMeta = metaOpt.orElse(null);
+
+        metasPeriodo.setFrequencia(indicadorMeta != null ? indicadorMeta.getFrequencia().getValue() : "");
+        metasPeriodo.setTipo(indicadorMeta != null ? indicadorMeta.getIndicador().getUnidade().getValue() : "");
+
         if (indicadorMeta != null) {
 
             int dividendo = getDividendo(indicadorMeta.getFrequencia());
@@ -223,8 +245,8 @@ public class IndicadorService {
 
                 DadoMetaPorPeriodo dadoMetaPorPeriodo = new DadoMetaPorPeriodo();
 
-                dadoMetaPorPeriodo.setMeta(indicadorMeta.getMeta(i+1));
-                dadoMetaPorPeriodo.setRealizado(indicadorMeta.getMedicao(i+1));
+                dadoMetaPorPeriodo.setMeta(indicadorMeta.getMeta(i + 1));
+                dadoMetaPorPeriodo.setRealizado(indicadorMeta.getMedicao(i + 1));
                 dadoMetaPorPeriodo.setUnidadeTemporal(indicadorMeta.getFrequencia().getValue());
                 dadoMetaPorPeriodo.setUnidadeMedida(indicadorMeta.getIndicador().getUnidade().getValue());
 
@@ -242,6 +264,51 @@ public class IndicadorService {
         comparacaoPeriodos.setIdProcesso(request.getIdProcesso());
         comparacaoPeriodos.setIdIndicador(request.getIdIndicador());
         comparacaoPeriodos.setAnoIndicador(request.getAnoIndicador());
+        comparacaoPeriodos.setDados(new ArrayList<>());
+
+        Optional<IndicadorMeta> metaOpt = indicadorMetaRepository.findByIndicadorAndAnoIndicadorAndProcesso(
+            request.getIdIndicador(),
+            request.getIdProcesso(),
+            String.valueOf(request.getAnoIndicador())
+        );
+
+        Optional<IndicadorMeta> metaAnteriorOpt = indicadorMetaRepository.findByIndicadorAndAnoIndicadorAndProcesso(
+            request.getIdIndicador(),
+            request.getIdProcesso(),
+            String.valueOf(request.getAnoIndicador() - 1)
+        );
+
+        IndicadorMeta indicadorMeta = metaOpt.orElse(null);
+        IndicadorMeta indicadorMetaAnterior = metaAnteriorOpt.orElse(null);
+        comparacaoPeriodos.setFrequencia(indicadorMeta != null ? indicadorMeta.getFrequencia().getValue() : "");
+        comparacaoPeriodos.setTipo(indicadorMeta != null ? indicadorMeta.getIndicador().getUnidade().getValue() : "");
+
+        if (indicadorMeta != null) {
+
+            int dividendo = getDividendo(indicadorMeta.getFrequencia());
+            boolean isAnual = indicadorMeta.getFrequencia() == EnumTemporal.ANUAL;
+            int anoAnterior = request.getAnoIndicador() - 1;
+
+            for (int i = 0; i < dividendo; i++) {
+
+                DadoComparacaoPeriodos dadoComparacao = new DadoComparacaoPeriodos();
+
+                dadoComparacao.setPeriodoAtual(isAnual ?
+                    indicadorMeta.getAnoIndicador() :
+                    String.format("%02d", i + 1) + "/" + indicadorMeta.getAnoIndicador());
+                dadoComparacao.setPeriodoAnterior(isAnual ?
+                    anoAnterior + "" :
+                    String.format("%02d", i + 1) + "/" + anoAnterior);
+
+                dadoComparacao.setValorAtual(indicadorMeta.getMedicao(i + 1));
+                dadoComparacao.setValorAnterior(indicadorMetaAnterior != null ?
+                    indicadorMetaAnterior.getMedicao(i + 1) :
+                    0);
+
+                comparacaoPeriodos.getDados().add(dadoComparacao);
+            }
+
+        }
 
 
         return comparacaoPeriodos;

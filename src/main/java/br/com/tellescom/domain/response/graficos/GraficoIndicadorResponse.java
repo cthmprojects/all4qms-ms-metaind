@@ -4,10 +4,7 @@ import java.util.List;
 
 public class GraficoIndicadorResponse extends  BaseGraficoIndicadorResponse {
 
-
-
     private List<DadosGraficoIndicador> dados;
-
 
     public List<DadosGraficoIndicador> getDados() {
         return dados;

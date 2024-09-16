@@ -10,6 +10,10 @@ public abstract class BaseGraficoIndicadorResponse {
 
     private int anoIndicador;
 
+    private String frequencia;
+
+    private String tipo;
+
     public int getIdIndicador() {
         return idIndicador;
     }
@@ -32,5 +36,21 @@ public abstract class BaseGraficoIndicadorResponse {
 
     public void setAnoIndicador(int anoIndicador) {
         this.anoIndicador = anoIndicador;
+    }
+
+    public String getFrequencia() {
+        return frequencia;
+    }
+
+    public void setFrequencia(String frequencia) {
+        this.frequencia = frequencia;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 }

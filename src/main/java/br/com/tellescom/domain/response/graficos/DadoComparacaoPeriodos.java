@@ -4,11 +4,11 @@ public class DadoComparacaoPeriodos implements DadosGraficoIndicador{
 
     private String periodoAtual;
 
-    private float valorAtual;
+    private Double valorAtual;
 
     private String periodoAnterior;
 
-    private float valorAnterior;
+    private Double valorAnterior;
 
     public String getPeriodoAtual() {
         return periodoAtual;
@@ -18,11 +18,11 @@ public class DadoComparacaoPeriodos implements DadosGraficoIndicador{
         this.periodoAtual = periodoAtual;
     }
 
-    public float getValorAtual() {
+    public Double getValorAtual() {
         return valorAtual;
     }
 
-    public void setValorAtual(float valorAtual) {
+    public void setValorAtual(Double valorAtual) {
         this.valorAtual = valorAtual;
     }
 
@@ -34,11 +34,11 @@ public class DadoComparacaoPeriodos implements DadosGraficoIndicador{
         this.periodoAnterior = periodoAnterior;
     }
 
-    public float getValorAnterior() {
+    public Double getValorAnterior() {
         return valorAnterior;
     }
 
-    public void setValorAnterior(float valorAnterior) {
+    public void setValorAnterior(Double valorAnterior) {
         this.valorAnterior = valorAnterior;
     }
 }
