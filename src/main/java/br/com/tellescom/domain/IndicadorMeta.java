@@ -3,9 +3,10 @@ package br.com.tellescom.domain;
 import br.com.tellescom.domain.enumeration.EnumTemporal;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import java.io.Serializable;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import java.io.Serializable;
 
 /**
  * A IndicadorMeta.
@@ -107,7 +108,7 @@ public class IndicadorMeta implements Serializable {
     private Double medicao12;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "indicadorMetas" }, allowSetters = true)
+    @JsonIgnoreProperties(value = {"indicadorMetas"}, allowSetters = true)
     private Indicador indicador;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -527,5 +528,90 @@ public class IndicadorMeta implements Serializable {
             ", medicao11=" + getMedicao11() +
             ", medicao12=" + getMedicao12() +
             "}";
+    }
+
+    public Double getMeta(int indice) {
+
+        Double meta;
+
+        switch (indice) {
+            case 2 -> {
+                meta = getMeta02();
+            }
+            case 3 -> {
+                meta = getMeta03();
+            }
+            case 4 -> {
+                meta = getMeta04();
+            }
+            case 5 -> {
+                meta = getMeta05();
+            }
+            case 6 -> {
+                meta = getMeta06();
+            }
+            case 7 -> {
+                meta = getMeta07();
+            }
+            case 8 -> {
+                meta = getMeta08();
+            }
+            case 9 -> {
+                meta = getMeta09();
+            }
+            case 10 -> {
+                meta = getMeta10();
+            }
+            case 11 -> {
+                meta = getMeta11();
+            }
+            default -> {
+                meta = getMeta01();
+            }
+        }
+
+        return meta;
+    }
+
+    public Double getMedicao(int indice) {
+        Double medicao;
+
+        switch (indice) {
+            case 2 -> {
+                medicao = getMedicao02();
+            }
+            case 3 -> {
+                medicao = getMedicao03();
+            }
+            case 4 -> {
+                medicao = getMedicao04();
+            }
+            case 5 -> {
+                medicao = getMedicao05();
+            }
+            case 6 -> {
+                medicao = getMedicao06();
+            }
+            case 7 -> {
+                medicao = getMedicao07();
+            }
+            case 8 -> {
+                medicao = getMedicao08();
+            }
+            case 9 -> {
+                medicao = getMedicao09();
+            }
+            case 10 -> {
+                medicao = getMedicao10();
+            }
+            case 11 -> {
+                medicao = getMedicao11();
+            }
+            default -> {
+                medicao = getMedicao01();
+            }
+        }
+
+        return medicao;
     }
 }

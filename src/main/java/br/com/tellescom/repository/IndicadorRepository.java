@@ -9,4 +9,8 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface IndicadorRepository extends JpaRepository<Indicador, Long> {}
+public interface IndicadorRepository extends JpaRepository<Indicador, Long> {
+
+
+
+}
