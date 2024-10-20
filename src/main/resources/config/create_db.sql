@@ -1,4 +1,4 @@
--- Criar banco e usuário para all4qmsMsAuditPlan
-CREATE USER all4qmsmsauditplan WITH PASSWORD 'all4qmsmsauditplan';
-CREATE DATABASE all4qmsmsauditplan OWNER all4qmsmsauditplan;
-GRANT ALL PRIVILEGES ON DATABASE all4qmsmsauditplan TO all4qmsmsauditplan;
+-- Criar banco e usuário para all4qmsmsmetaind
+CREATE USER all4qmsmsmetaind WITH PASSWORD 'all4qmsmsmetaind';
+CREATE DATABASE all4qmsmsmetaind OWNER all4qmsmsmetaind;
+GRANT ALL PRIVILEGES ON DATABASE all4qmsmsmetaind TO all4qmsmsmetaind;
