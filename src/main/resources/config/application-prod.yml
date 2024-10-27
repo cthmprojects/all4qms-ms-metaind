@@ -64,6 +64,11 @@ spring:
     hikari:
       poolName: Hikari
       auto-commit: false
+      maximum-pool-size: 20  # Número máximo de conexões no pool
+      minimum-idle: 5  # Número mínimo de conexões inativas no pool
+      idle-timeout: 30000  # Tempo em milissegundos antes de uma conexão ociosa ser liberada
+      max-lifetime: 1800000  # Tempo em milissegundos antes de uma conexão ser descartada
+      connection-timeout: 20000  # Tempo de espera para obter uma conexão do pool
   # Replace by 'prod, faker' to add the faker context and have sample data loaded in production
   liquibase:
     contexts: prod
