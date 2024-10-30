@@ -52,7 +52,7 @@ public class MetaResultadoService {
         log.debug("Request to save MetaResultadoRequest : {}", request);
         MetaResultado metaResultado = metaResultadoMapper.toEntity(request.getMetaResultadoDTO());
         metaResultado = metaResultadoRepository.save(metaResultado);
-        if (!request.getAnexos().isEmpty()) {
+        if (request.getAnexos() != null && !request.getAnexos().isEmpty()) {
             salvaAnexos(metaResultado.getId(), request.getAnexos());
         }
         return metaResultadoMapper.toDto(metaResultado);

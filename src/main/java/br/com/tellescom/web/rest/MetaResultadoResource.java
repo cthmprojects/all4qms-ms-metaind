@@ -66,7 +66,7 @@ public class MetaResultadoResource {
     @PostMapping(value = "", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
     public ResponseEntity<MetaResultadoDTO> createMetaResultado(
             @RequestPart("metaResultadoDTO") String metaResultadoDTOJson,
-            @RequestPart("anexos") List<MultipartFile> files)
+            @RequestPart(value = "anexos", required = false) List<MultipartFile> files)
             throws URISyntaxException {
         MetaResultadoDTO metaResultadoDTO = convertJsonToMetaResultadoDTO(metaResultadoDTOJson);
         var request = new MetaResultadoRequest();
