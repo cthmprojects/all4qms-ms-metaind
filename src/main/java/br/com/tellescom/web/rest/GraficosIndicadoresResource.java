@@ -1,7 +1,6 @@
 package br.com.tellescom.web.rest;
 
 import br.com.tellescom.domain.request.GraficoIndicadorRequest;
-import br.com.tellescom.domain.response.graficos.BaseGraficoIndicadorResponse;
 import br.com.tellescom.domain.response.graficos.GraficoIndicadorResponse;
 import br.com.tellescom.domain.response.graficos.QualidadeProducaoIndicadorResponse;
 import br.com.tellescom.repository.IndicadorRepository;
@@ -27,7 +26,7 @@ public class GraficosIndicadoresResource {
 
     private final Logger log = LoggerFactory.getLogger(GraficosIndicadoresResource.class);
 
-    private static final String ENTITY_NAME = "all4QmsMsGraficoIndicador";
+    private static final String ENTITY_NAME = "Gráfico do Indicador";
 
     @Value("${jhipster.clientApp.name}")
     private String applicationName;

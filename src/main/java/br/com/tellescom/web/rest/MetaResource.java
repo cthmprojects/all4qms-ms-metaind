@@ -5,29 +5,24 @@ import br.com.tellescom.domain.response.MetaResponse;
 import br.com.tellescom.repository.MetaRepository;
 import br.com.tellescom.service.MetaQueryService;
 import br.com.tellescom.service.MetaService;
-import br.com.tellescom.service.criteria.MetaCriteria;
 import br.com.tellescom.service.dto.MetaDTO;
 import br.com.tellescom.web.rest.errors.BadRequestAlertException;
-
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-
+import br.com.tellescom.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import tech.jhipster.web.util.HeaderUtil;
-import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * REST controller for managing {@link br.com.tellescom.domain.Meta}.
@@ -38,7 +33,7 @@ public class MetaResource {
 
     private final Logger log = LoggerFactory.getLogger(MetaResource.class);
 
-    private static final String ENTITY_NAME = "all4QmsMsMetaIndMeta";
+    private static final String ENTITY_NAME = "Meta";
 
     @Value("${jhipster.clientApp.name}")
     private String applicationName;

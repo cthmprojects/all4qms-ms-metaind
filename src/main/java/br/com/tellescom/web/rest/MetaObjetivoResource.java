@@ -9,12 +9,13 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+
+import br.com.tellescom.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
 /**
@@ -26,7 +27,7 @@ public class MetaObjetivoResource {
 
     private final Logger log = LoggerFactory.getLogger(MetaObjetivoResource.class);
 
-    private static final String ENTITY_NAME = "all4QmsMsMetaIndMetaObjetivo";
+    private static final String ENTITY_NAME = "Objetivo";
 
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
