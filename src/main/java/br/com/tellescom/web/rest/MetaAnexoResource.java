@@ -5,13 +5,7 @@ import br.com.tellescom.repository.MetaAnexoRepository;
 import br.com.tellescom.service.MetaAnexoService;
 import br.com.tellescom.service.dto.MetaAnexoDTO;
 import br.com.tellescom.web.rest.errors.BadRequestAlertException;
-import br.com.tellescom.web.rest.errors.NotFoundAlertException;
-import br.com.tellescom.web.rest.errors.ServerErrorAlertException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import br.com.tellescom.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,8 +14,13 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * REST controller for managing {@link br.com.tellescom.domain.MetaAnexo}.
@@ -32,7 +31,7 @@ public class MetaAnexoResource {
 
     private final Logger log = LoggerFactory.getLogger(MetaAnexoResource.class);
 
-    private static final String ENTITY_NAME = "all4QmsMsMetaIndMetaAnexo";
+    private static final String ENTITY_NAME = "Anexo";
 
     @Value("${jhipster.clientApp.name}")
     private String applicationName;

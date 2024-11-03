@@ -5,6 +5,7 @@ import br.com.tellescom.repository.MetaResultadoRepository;
 import br.com.tellescom.service.MetaResultadoService;
 import br.com.tellescom.service.dto.MetaResultadoDTO;
 import br.com.tellescom.web.rest.errors.BadRequestAlertException;
+import br.com.tellescom.web.rest.util.HeaderUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -29,7 +30,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
-import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
 /**
@@ -41,7 +41,7 @@ public class MetaResultadoResource {
 
     private final Logger log = LoggerFactory.getLogger(MetaResultadoResource.class);
 
-    private static final String ENTITY_NAME = "all4QmsMsMetaIndMetaResultado";
+    private static final String ENTITY_NAME = "Resultado";
 
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
