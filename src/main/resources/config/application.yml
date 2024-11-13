@@ -222,8 +222,8 @@ jhipster:
   api-docs:
     default-include-pattern: /api/**
     management-include-pattern: /management/**
-    title: All 4 Qms Ms Meta Ind API
-    description: All 4 Qms Ms Meta Ind API documentation
+    title: Metas e Indicadores Ind API
+    description: Metas e Indicadores API documentation
     version: 0.0.1
     terms-of-service-url:
     contact-name:
