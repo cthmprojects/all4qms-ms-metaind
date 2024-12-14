@@ -26,13 +26,15 @@ public class CacheConfiguration {
     public CacheConfiguration(JHipsterProperties jHipsterProperties) {
         JHipsterProperties.Cache.Ehcache ehcache = jHipsterProperties.getCache().getEhcache();
 
-        jcacheConfiguration =
-            Eh107Configuration.fromEhcacheCacheConfiguration(
-                CacheConfigurationBuilder
-                    .newCacheConfigurationBuilder(Object.class, Object.class, ResourcePoolsBuilder.heap(ehcache.getMaxEntries()))
-                    .withExpiry(ExpiryPolicyBuilder.timeToLiveExpiration(Duration.ofSeconds(ehcache.getTimeToLiveSeconds())))
-                    .build()
-            );
+        jcacheConfiguration = Eh107Configuration.fromEhcacheCacheConfiguration(
+            CacheConfigurationBuilder.newCacheConfigurationBuilder(
+                Object.class,
+                Object.class,
+                ResourcePoolsBuilder.heap(ehcache.getMaxEntries())
+            )
+                .withExpiry(ExpiryPolicyBuilder.timeToLiveExpiration(Duration.ofSeconds(ehcache.getTimeToLiveSeconds())))
+                .build()
+        );
     }
 
     @Bean
@@ -56,6 +58,7 @@ public class CacheConfiguration {
             createCache(cm, br.com.tellescom.domain.MetaRecurso.class.getName() + ".metas");
             createCache(cm, br.com.tellescom.domain.MetaResultado.class.getName());
             createCache(cm, br.com.tellescom.domain.MetaResultado.class.getName() + ".anexos");
+            createCache(cm, br.com.tellescom.domain.IndicadorCritica.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }
