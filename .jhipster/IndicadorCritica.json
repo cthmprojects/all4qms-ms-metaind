@@ -1,0 +1,62 @@
+{
+  "annotations": {
+    "changelogDate": "20241213220648"
+  },
+  "clientRootFolder": "all4qmsMsMetaInd",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "idIndicadorMeta",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "idPlano",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "analiseCritica",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "4000"
+    },
+    {
+      "fieldName": "observacao",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "4000"
+    },
+    {
+      "fieldName": "mes",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "ano",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "criadoPor",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "criadoEm",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "atualizadoPor",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "atualizadoEm",
+      "fieldType": "Instant"
+    }
+  ],
+  "jpaMetamodelFiltering": false,
+  "microserviceName": "all4qmsMsMetaInd",
+  "name": "IndicadorCritica",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}
