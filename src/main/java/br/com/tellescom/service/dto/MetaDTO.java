@@ -1,7 +1,5 @@
 package br.com.tellescom.service.dto;
 
-import br.com.tellescom.domain.enumeration.EnumTemporal;
-
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
@@ -21,7 +19,7 @@ public class MetaDTO implements Serializable {
 
     private String descricaoMonitoramentoControle;
 
-    private EnumTemporal frequencia;
+    private String frequencia;
 
     private String acao;
 
@@ -29,13 +27,15 @@ public class MetaDTO implements Serializable {
 
     private Integer idProcesso;
 
-    private EnumTemporal monitoramento;
+    private String monitoramento;
 
-    private EnumTemporal periodo;
+    private String periodo;
 
     private Set<MetaRecursoDTO> recursos = new HashSet<>();
 
     private MetaObjetivoDTO metaObjetivo;
+
+    private Integer flAtivo;
 
     public Long getId() {
         return id;
@@ -61,11 +61,11 @@ public class MetaDTO implements Serializable {
         this.monitoramentoControle = monitoramentoControle;
     }
 
-    public EnumTemporal getFrequencia() {
+    public String getFrequencia() {
         return frequencia;
     }
 
-    public void setFrequencia(EnumTemporal frequencia) {
+    public void setFrequencia(String frequencia) {
         this.frequencia = frequencia;
     }
 
@@ -101,19 +101,19 @@ public class MetaDTO implements Serializable {
         this.idProcesso = idProcesso;
     }
 
-    public EnumTemporal getMonitoramento() {
+    public String getMonitoramento() {
         return monitoramento;
     }
 
-    public void setMonitoramento(EnumTemporal monitoramento) {
+    public void setMonitoramento(String monitoramento) {
         this.monitoramento = monitoramento;
     }
 
-    public EnumTemporal getPeriodo() {
+    public String getPeriodo() {
         return periodo;
     }
 
-    public void setPeriodo(EnumTemporal periodo) {
+    public void setPeriodo(String periodo) {
         this.periodo = periodo;
     }
 
@@ -131,6 +131,14 @@ public class MetaDTO implements Serializable {
 
     public void setMetaObjetivo(MetaObjetivoDTO metaObjetivo) {
         this.metaObjetivo = metaObjetivo;
+    }
+
+    public Integer getFlAtivo() {
+        return flAtivo;
+    }
+
+    public void setFlAtivo(Integer flAtivo) {
+        this.flAtivo = flAtivo;
     }
 
     @Override
@@ -168,6 +176,7 @@ public class MetaDTO implements Serializable {
             ", monitoramento='" + getMonitoramento() + "'" +
             ", periodo='" + getPeriodo() + "'" +
             ", recursos=" + getRecursos() +
+            ", flAtivp=" + getFlAtivo() +
             ", metaObjetivo=" + getMetaObjetivo() +
             "}";
     }

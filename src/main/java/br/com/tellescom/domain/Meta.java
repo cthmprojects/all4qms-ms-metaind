@@ -1,6 +1,5 @@
 package br.com.tellescom.domain;
 
-import br.com.tellescom.domain.enumeration.EnumTemporal;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
@@ -40,9 +39,8 @@ public class Meta implements Serializable {
     @Column(name = "descricao_monitoramento_controle")
     private String descricaoMonitoramentoControle;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "frequencia")
-    private EnumTemporal frequencia;
+    private String frequencia;
 
     @Column(name = "acao")
     private String acao;
@@ -53,13 +51,14 @@ public class Meta implements Serializable {
     @Column(name = "id_processo")
     private Integer idProcesso;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "monitoramento")
-    private EnumTemporal monitoramento;
+    private String monitoramento;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "periodo")
-    private EnumTemporal periodo;
+    private String periodo;
+
+    @Column(name = "fl_ativo")
+    private Integer flAtivo;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "meta")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -134,16 +133,16 @@ public class Meta implements Serializable {
         this.descricaoMonitoramentoControle = descricaoMonitoramentoControle;
     }
 
-    public EnumTemporal getFrequencia() {
+    public String getFrequencia() {
         return frequencia;
     }
 
-    public Meta frequencia(EnumTemporal frequencia) {
+    public Meta frequencia(String frequencia) {
         this.setFrequencia(frequencia);
         return this;
     }
 
-    public void setFrequencia(EnumTemporal frequencia) {
+    public void setFrequencia(String frequencia) {
         this.frequencia = frequencia;
     }
 
@@ -186,29 +185,29 @@ public class Meta implements Serializable {
         this.idProcesso = idProcesso;
     }
 
-    public EnumTemporal getMonitoramento() {
+    public String getMonitoramento() {
         return this.monitoramento;
     }
 
-    public Meta monitoramento(EnumTemporal monitoramento) {
+    public Meta monitoramento(String monitoramento) {
         this.setMonitoramento(monitoramento);
         return this;
     }
 
-    public void setMonitoramento(EnumTemporal monitoramento) {
+    public void setMonitoramento(String monitoramento) {
         this.monitoramento = monitoramento;
     }
 
-    public EnumTemporal getPeriodo() {
+    public String getPeriodo() {
         return this.periodo;
     }
 
-    public Meta periodo(EnumTemporal periodo) {
+    public Meta periodo(String periodo) {
         this.setPeriodo(periodo);
         return this;
     }
 
-    public void setPeriodo(EnumTemporal periodo) {
+    public void setPeriodo(String periodo) {
         this.periodo = periodo;
     }
 
@@ -279,6 +278,19 @@ public class Meta implements Serializable {
         return this;
     }
 
+    public Integer getFlAtivo() {
+        return flAtivo;
+    }
+
+    public Meta flAtivo(Integer flAtivo){
+        this.setFlAtivo(flAtivo);
+        return this;
+    }
+
+    public void setFlAtivo(Integer flAtivo) {
+        this.flAtivo = flAtivo;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -312,6 +324,7 @@ public class Meta implements Serializable {
             ", idProcesso=" + getIdProcesso() +
             ", monitoramento='" + getMonitoramento() + "'" +
             ", periodo='" + getPeriodo() + "'" +
+            ", flAtivo=" + getFlAtivo() +
             "}";
     }
 }

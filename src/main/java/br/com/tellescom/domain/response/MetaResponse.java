@@ -33,6 +33,9 @@ public class MetaResponse implements Serializable {
 
     private String analise;
 
+    @Column(name = "monitoramento_controle")
+    private String indicadorControle;
+
     private Boolean parcial;
 
     @Column(name = "meta_atingida")
@@ -40,4 +43,8 @@ public class MetaResponse implements Serializable {
 
     @Column(name = "lancado_em")
     private Instant lancadoEm;
+
+    @Column(name = "fl_ativo")
+    private Integer flAtivo;
+
 }
