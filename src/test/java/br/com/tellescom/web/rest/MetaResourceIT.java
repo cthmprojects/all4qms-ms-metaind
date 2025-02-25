@@ -64,11 +64,11 @@ class MetaResourceIT {
     private static final Integer UPDATED_ID_PROCESSO = 2;
     private static final Integer SMALLER_ID_PROCESSO = 1 - 1;
 
-    private static final EnumTemporal DEFAULT_MONITORAMENTO = EnumTemporal.MENSAL;
-    private static final EnumTemporal UPDATED_MONITORAMENTO = EnumTemporal.BIMESTRAL;
+    private static final String DEFAULT_MONITORAMENTO = "MENSAL";
+    private static final String UPDATED_MONITORAMENTO = "BIMESTRAL";
 
-    private static final EnumTemporal DEFAULT_PERIODO = EnumTemporal.MENSAL;
-    private static final EnumTemporal UPDATED_PERIODO = EnumTemporal.BIMESTRAL;
+    private static final String DEFAULT_PERIODO = "MENSAL";
+    private static final String UPDATED_PERIODO = "BIMESTRAL";
 
     private static final String ENTITY_API_URL = "/api/metas";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";

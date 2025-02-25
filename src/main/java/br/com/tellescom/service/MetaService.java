@@ -49,6 +49,7 @@ public class MetaService {
      */
     public MetaDTO save(MetaDTO metaDTO) {
         log.debug("Request to save Meta : {}", metaDTO);
+        metaDTO.setFlAtivo(1);
         Meta meta = metaMapper.toEntity(metaDTO);
         meta = metaRepository.save(meta);
         return metaMapper.toDto(meta);
