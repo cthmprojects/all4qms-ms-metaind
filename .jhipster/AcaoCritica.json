@@ -1,0 +1,65 @@
+{
+  "annotations": {
+    "changelogDate": "20250322190424"
+  },
+  "clientRootFolder": "all4qmsMsMetaInd",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "acaoCritica",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "4000"
+    },
+    {
+      "fieldName": "nomeResponsavel",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "idResponsavel",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "dataAcao",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "instrucaoAcao",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "4000"
+    },
+    {
+      "fieldName": "idIndicadorCritica",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "criadoEm",
+      "fieldType": "ZonedDateTime",
+      "fieldValidateRules": []
+    },
+    {
+      "fieldName": "atualizadoEm",
+      "fieldType": "ZonedDateTime"
+    }
+  ],
+  "jpaMetamodelFiltering": false,
+  "microserviceName": "all4qmsMsMetaInd",
+  "name": "AcaoCritica",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "id",
+      "otherEntityName": "indicadorCritica",
+      "otherEntityRelationshipName": "acaoCritica",
+      "relationshipName": "indicadorCritica",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

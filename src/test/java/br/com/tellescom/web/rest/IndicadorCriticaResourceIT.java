@@ -1,5 +1,11 @@
 package br.com.tellescom.web.rest;
 
+import static br.com.tellescom.domain.IndicadorCriticaAsserts.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
 import br.com.tellescom.IntegrationTest;
 import br.com.tellescom.domain.IndicadorCritica;
 import br.com.tellescom.repository.IndicadorCriticaRepository;
@@ -7,6 +13,10 @@ import br.com.tellescom.service.dto.IndicadorCriticaDTO;
 import br.com.tellescom.service.mapper.IndicadorCriticaMapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicLong;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,17 +26,6 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
-
-import static br.com.tellescom.domain.IndicadorCriticaAsserts.*;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * Integration tests for the {@link IndicadorCriticaResource} REST controller.
@@ -354,9 +353,11 @@ class IndicadorCriticaResourceIT {
         partialUpdatedIndicadorCritica.setId(indicadorCritica.getId());
 
         partialUpdatedIndicadorCritica
-            .idIndicadorMeta(UPDATED_ID_INDICADOR_META)
             .idPlano(UPDATED_ID_PLANO)
-            .analiseCritica(UPDATED_ANALISE_CRITICA);
+            .analiseCritica(UPDATED_ANALISE_CRITICA)
+            .ano(UPDATED_ANO)
+            .criadoEm(UPDATED_CRIADO_EM)
+            .atualizadoPor(UPDATED_ATUALIZADO_POR);
 
         restIndicadorCriticaMockMvc
             .perform(

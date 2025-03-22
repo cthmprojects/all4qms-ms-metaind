@@ -29,9 +29,12 @@ public class IndicadorCriticaService {
 
     private final IndicadorCriticaMapper indicadorCriticaMapper;
 
-    public IndicadorCriticaService(IndicadorCriticaRepository indicadorCriticaRepository, IndicadorCriticaMapper indicadorCriticaMapper) {
+    private final AcaoCriticaService acaoCriticaService;
+
+    public IndicadorCriticaService(IndicadorCriticaRepository indicadorCriticaRepository, IndicadorCriticaMapper indicadorCriticaMapper, AcaoCriticaService acaoCriticaService) {
         this.indicadorCriticaRepository = indicadorCriticaRepository;
         this.indicadorCriticaMapper = indicadorCriticaMapper;
+        this.acaoCriticaService = acaoCriticaService;
     }
 
     /**
@@ -94,8 +97,8 @@ public class IndicadorCriticaService {
         return indicadorCriticaRepository
             .findAll()
             .stream()
-            .map(indicadorCriticaMapper::toDto)
-            .collect(Collectors.toCollection(LinkedList::new));
+            .map(indicadorCritica -> indicadorCriticaMapper.toDto(indicadorCritica, acaoCriticaService))
+            .toList();
     }
 
     /**

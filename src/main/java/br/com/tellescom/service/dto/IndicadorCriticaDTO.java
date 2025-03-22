@@ -1,9 +1,12 @@
 package br.com.tellescom.service.dto;
 
+import br.com.tellescom.domain.AcaoCritica;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A DTO for the {@link br.com.tellescom.domain.IndicadorCritica} entity.
@@ -34,6 +37,8 @@ public class IndicadorCriticaDTO implements Serializable {
     private Long atualizadoPor;
 
     private Instant atualizadoEm;
+
+    private Set<AcaoCriticaDTO> acaoCriticas = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -123,6 +128,14 @@ public class IndicadorCriticaDTO implements Serializable {
         this.atualizadoEm = atualizadoEm;
     }
 
+    public Set<AcaoCriticaDTO> getAcaoCriticas() {
+        return acaoCriticas;
+    }
+
+    public void setAcaoCriticas(Set<AcaoCriticaDTO> acaoCriticas) {
+        this.acaoCriticas = acaoCriticas;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -159,6 +172,7 @@ public class IndicadorCriticaDTO implements Serializable {
             ", criadoEm='" + getCriadoEm() + "'" +
             ", atualizadoPor=" + getAtualizadoPor() +
             ", atualizadoEm='" + getAtualizadoEm() + "'" +
+            ", acaoCritica='" + getAcaoCriticas() +
             "}";
     }
 }
