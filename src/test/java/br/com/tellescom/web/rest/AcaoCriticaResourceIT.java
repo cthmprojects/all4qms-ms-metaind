@@ -1,5 +1,13 @@
 package br.com.tellescom.web.rest;
 
+import static br.com.tellescom.domain.AcaoCriticaAsserts.*;
+import static br.com.tellescom.web.rest.TestUtil.createUpdateProxyForBean;
+import static br.com.tellescom.web.rest.TestUtil.sameInstant;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
 import br.com.tellescom.IntegrationTest;
 import br.com.tellescom.domain.AcaoCritica;
 import br.com.tellescom.repository.AcaoCriticaRepository;
@@ -7,6 +15,13 @@ import br.com.tellescom.service.dto.AcaoCriticaDTO;
 import br.com.tellescom.service.mapper.AcaoCriticaMapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicLong;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,17 +31,6 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.*;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
-
-import static br.com.tellescom.domain.AcaoCriticaAsserts.*;
-import static br.com.tellescom.web.rest.TestUtil.sameInstant;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * Integration tests for the {@link AcaoCriticaResource} REST controller.
@@ -51,11 +55,17 @@ class AcaoCriticaResourceIT {
     private static final String DEFAULT_INSTRUCAO_ACAO = "AAAAAAAAAA";
     private static final String UPDATED_INSTRUCAO_ACAO = "BBBBBBBBBB";
 
+    private static final Long DEFAULT_ID_INDICADOR_CRITICA = 1L;
+    private static final Long UPDATED_ID_INDICADOR_CRITICA = 2L;
+
     private static final ZonedDateTime DEFAULT_CRIADO_EM = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
     private static final ZonedDateTime UPDATED_CRIADO_EM = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
     private static final ZonedDateTime DEFAULT_ATUALIZADO_EM = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
     private static final ZonedDateTime UPDATED_ATUALIZADO_EM = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+
+    private static final Boolean DEFAULT_IS_NOTIFICADO = false;
+    private static final Boolean UPDATED_IS_NOTIFICADO = true;
 
     private static final String ENTITY_API_URL = "/api/acao-criticas";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -84,7 +94,7 @@ class AcaoCriticaResourceIT {
 
     /**
      * Create an entity for this test.
-     * <p>
+     *
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -95,13 +105,15 @@ class AcaoCriticaResourceIT {
             .idResponsavel(DEFAULT_ID_RESPONSAVEL)
             .dataAcao(DEFAULT_DATA_ACAO)
             .instrucaoAcao(DEFAULT_INSTRUCAO_ACAO)
+            .idIndicadorCritica(DEFAULT_ID_INDICADOR_CRITICA)
             .criadoEm(DEFAULT_CRIADO_EM)
-            .atualizadoEm(DEFAULT_ATUALIZADO_EM);
+            .atualizadoEm(DEFAULT_ATUALIZADO_EM)
+            .isNotificado(DEFAULT_IS_NOTIFICADO);
     }
 
     /**
      * Create an updated entity for this test.
-     * <p>
+     *
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -112,8 +124,10 @@ class AcaoCriticaResourceIT {
             .idResponsavel(UPDATED_ID_RESPONSAVEL)
             .dataAcao(UPDATED_DATA_ACAO)
             .instrucaoAcao(UPDATED_INSTRUCAO_ACAO)
+            .idIndicadorCritica(UPDATED_ID_INDICADOR_CRITICA)
             .criadoEm(UPDATED_CRIADO_EM)
-            .atualizadoEm(UPDATED_ATUALIZADO_EM);
+            .atualizadoEm(UPDATED_ATUALIZADO_EM)
+            .isNotificado(UPDATED_IS_NOTIFICADO);
     }
 
     @BeforeEach
@@ -175,6 +189,8 @@ class AcaoCriticaResourceIT {
     @Transactional
     void checkIdIndicadorCriticaIsRequired() throws Exception {
         long databaseSizeBeforeTest = getRepositoryCount();
+        // set the field null
+        acaoCritica.setIdIndicadorCritica(null);
 
         // Create the AcaoCritica, which fails.
         AcaoCriticaDTO acaoCriticaDTO = acaoCriticaMapper.toDto(acaoCritica);
@@ -203,8 +219,10 @@ class AcaoCriticaResourceIT {
             .andExpect(jsonPath("$.[*].idResponsavel").value(hasItem(DEFAULT_ID_RESPONSAVEL.intValue())))
             .andExpect(jsonPath("$.[*].dataAcao").value(hasItem(DEFAULT_DATA_ACAO.toString())))
             .andExpect(jsonPath("$.[*].instrucaoAcao").value(hasItem(DEFAULT_INSTRUCAO_ACAO)))
+            .andExpect(jsonPath("$.[*].idIndicadorCritica").value(hasItem(DEFAULT_ID_INDICADOR_CRITICA.intValue())))
             .andExpect(jsonPath("$.[*].criadoEm").value(hasItem(sameInstant(DEFAULT_CRIADO_EM))))
-            .andExpect(jsonPath("$.[*].atualizadoEm").value(hasItem(sameInstant(DEFAULT_ATUALIZADO_EM))));
+            .andExpect(jsonPath("$.[*].atualizadoEm").value(hasItem(sameInstant(DEFAULT_ATUALIZADO_EM))))
+            .andExpect(jsonPath("$.[*].isNotificado").value(hasItem(DEFAULT_IS_NOTIFICADO)));
     }
 
     @Test
@@ -224,8 +242,10 @@ class AcaoCriticaResourceIT {
             .andExpect(jsonPath("$.idResponsavel").value(DEFAULT_ID_RESPONSAVEL.intValue()))
             .andExpect(jsonPath("$.dataAcao").value(DEFAULT_DATA_ACAO.toString()))
             .andExpect(jsonPath("$.instrucaoAcao").value(DEFAULT_INSTRUCAO_ACAO))
+            .andExpect(jsonPath("$.idIndicadorCritica").value(DEFAULT_ID_INDICADOR_CRITICA.intValue()))
             .andExpect(jsonPath("$.criadoEm").value(sameInstant(DEFAULT_CRIADO_EM)))
-            .andExpect(jsonPath("$.atualizadoEm").value(sameInstant(DEFAULT_ATUALIZADO_EM)));
+            .andExpect(jsonPath("$.atualizadoEm").value(sameInstant(DEFAULT_ATUALIZADO_EM)))
+            .andExpect(jsonPath("$.isNotificado").value(DEFAULT_IS_NOTIFICADO));
     }
 
     @Test
@@ -253,8 +273,10 @@ class AcaoCriticaResourceIT {
             .idResponsavel(UPDATED_ID_RESPONSAVEL)
             .dataAcao(UPDATED_DATA_ACAO)
             .instrucaoAcao(UPDATED_INSTRUCAO_ACAO)
+            .idIndicadorCritica(UPDATED_ID_INDICADOR_CRITICA)
             .criadoEm(UPDATED_CRIADO_EM)
-            .atualizadoEm(UPDATED_ATUALIZADO_EM);
+            .atualizadoEm(UPDATED_ATUALIZADO_EM)
+            .isNotificado(UPDATED_IS_NOTIFICADO);
         AcaoCriticaDTO acaoCriticaDTO = acaoCriticaMapper.toDto(updatedAcaoCritica);
 
         restAcaoCriticaMockMvc
@@ -344,7 +366,7 @@ class AcaoCriticaResourceIT {
         AcaoCritica partialUpdatedAcaoCritica = new AcaoCritica();
         partialUpdatedAcaoCritica.setId(acaoCritica.getId());
 
-        partialUpdatedAcaoCritica.acaoCritica(UPDATED_ACAO_CRITICA).instrucaoAcao(UPDATED_INSTRUCAO_ACAO);
+        partialUpdatedAcaoCritica.idResponsavel(UPDATED_ID_RESPONSAVEL).dataAcao(UPDATED_DATA_ACAO);
 
         restAcaoCriticaMockMvc
             .perform(
@@ -357,6 +379,10 @@ class AcaoCriticaResourceIT {
         // Validate the AcaoCritica in the database
 
         assertSameRepositoryCount(databaseSizeBeforeUpdate);
+        assertAcaoCriticaUpdatableFieldsEquals(
+            createUpdateProxyForBean(partialUpdatedAcaoCritica, acaoCritica),
+            getPersistedAcaoCritica(acaoCritica)
+        );
     }
 
     @Test
@@ -377,8 +403,10 @@ class AcaoCriticaResourceIT {
             .idResponsavel(UPDATED_ID_RESPONSAVEL)
             .dataAcao(UPDATED_DATA_ACAO)
             .instrucaoAcao(UPDATED_INSTRUCAO_ACAO)
+            .idIndicadorCritica(UPDATED_ID_INDICADOR_CRITICA)
             .criadoEm(UPDATED_CRIADO_EM)
-            .atualizadoEm(UPDATED_ATUALIZADO_EM);
+            .atualizadoEm(UPDATED_ATUALIZADO_EM)
+            .isNotificado(UPDATED_IS_NOTIFICADO);
 
         restAcaoCriticaMockMvc
             .perform(

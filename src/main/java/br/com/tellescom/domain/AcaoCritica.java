@@ -43,11 +43,18 @@ public class AcaoCritica implements Serializable {
     @Column(name = "instrucao_acao", length = 4000)
     private String instrucaoAcao;
 
+    @NotNull
+    @Column(name = "id_indicador_critica", nullable = false)
+    private Long idIndicadorCritica;
+
     @Column(name = "criado_em")
     private ZonedDateTime criadoEm;
 
     @Column(name = "atualizado_em")
     private ZonedDateTime atualizadoEm;
+
+    @Column(name = "is_notificado")
+    private Boolean isNotificado;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = { "acaoCriticas" }, allowSetters = true)
@@ -133,6 +140,19 @@ public class AcaoCritica implements Serializable {
         this.instrucaoAcao = instrucaoAcao;
     }
 
+    public Long getIdIndicadorCritica() {
+        return this.idIndicadorCritica;
+    }
+
+    public AcaoCritica idIndicadorCritica(Long idIndicadorCritica) {
+        this.setIdIndicadorCritica(idIndicadorCritica);
+        return this;
+    }
+
+    public void setIdIndicadorCritica(Long idIndicadorCritica) {
+        this.idIndicadorCritica = idIndicadorCritica;
+    }
+
     public ZonedDateTime getCriadoEm() {
         return this.criadoEm;
     }
@@ -157,6 +177,19 @@ public class AcaoCritica implements Serializable {
 
     public void setAtualizadoEm(ZonedDateTime atualizadoEm) {
         this.atualizadoEm = atualizadoEm;
+    }
+
+    public Boolean getIsNotificado() {
+        return this.isNotificado;
+    }
+
+    public AcaoCritica isNotificado(Boolean isNotificado) {
+        this.setIsNotificado(isNotificado);
+        return this;
+    }
+
+    public void setIsNotificado(Boolean isNotificado) {
+        this.isNotificado = isNotificado;
     }
 
     public IndicadorCritica getIndicadorCritica() {
@@ -201,8 +234,10 @@ public class AcaoCritica implements Serializable {
             ", idResponsavel=" + getIdResponsavel() +
             ", dataAcao='" + getDataAcao() + "'" +
             ", instrucaoAcao='" + getInstrucaoAcao() + "'" +
+            ", idIndicadorCritica=" + getIdIndicadorCritica() +
             ", criadoEm='" + getCriadoEm() + "'" +
             ", atualizadoEm='" + getAtualizadoEm() + "'" +
+            ", isNotificado='" + getIsNotificado() + "'" +
             "}";
     }
 }

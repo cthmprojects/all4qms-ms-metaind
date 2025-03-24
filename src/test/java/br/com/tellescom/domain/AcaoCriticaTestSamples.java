@@ -15,7 +15,8 @@ public class AcaoCriticaTestSamples {
             .acaoCritica("acaoCritica1")
             .nomeResponsavel("nomeResponsavel1")
             .idResponsavel(1L)
-            .instrucaoAcao("instrucaoAcao1");
+            .instrucaoAcao("instrucaoAcao1")
+            .idIndicadorCritica(1L);
     }
 
     public static AcaoCritica getAcaoCriticaSample2() {
@@ -24,7 +25,8 @@ public class AcaoCriticaTestSamples {
             .acaoCritica("acaoCritica2")
             .nomeResponsavel("nomeResponsavel2")
             .idResponsavel(2L)
-            .instrucaoAcao("instrucaoAcao2");
+            .instrucaoAcao("instrucaoAcao2")
+            .idIndicadorCritica(2L);
     }
 
     public static AcaoCritica getAcaoCriticaRandomSampleGenerator() {
@@ -33,6 +35,7 @@ public class AcaoCriticaTestSamples {
             .acaoCritica(UUID.randomUUID().toString())
             .nomeResponsavel(UUID.randomUUID().toString())
             .idResponsavel(longCount.incrementAndGet())
-            .instrucaoAcao(UUID.randomUUID().toString());
+            .instrucaoAcao(UUID.randomUUID().toString())
+            .idIndicadorCritica(longCount.incrementAndGet());
     }
 }

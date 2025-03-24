@@ -242,3 +242,14 @@ jhipster:
 # ===================================================================
 
 # application:
+mail-service:
+  host: smtp.gmail.com
+  port: 587
+  username: all4qms.mail.teste@gmail.com
+  # Use a senha do aplicativo gerada em vez da senha da conta
+  password: qqsy sjji klem rigg
+  # Outras propriedades setar no arquivo abaixo
+  # src/main/java/com/tellescom/all4qms/config/MailSenderConfiguration.java
+api:
+  urls:
+    gatewayUsuario: ${SERVER_GATEWAY:http://localhost:8080}/api/usuarios

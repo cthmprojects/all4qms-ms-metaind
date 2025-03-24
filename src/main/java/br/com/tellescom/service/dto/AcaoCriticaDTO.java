@@ -26,9 +26,14 @@ public class AcaoCriticaDTO implements Serializable {
     @Size(max = 4000)
     private String instrucaoAcao;
 
+    @NotNull
+    private Long idIndicadorCritica;
+
     private ZonedDateTime criadoEm;
 
     private ZonedDateTime atualizadoEm;
+
+    private Boolean isNotificado;
 
     private IndicadorCriticaDTO indicadorCritica;
 
@@ -80,6 +85,14 @@ public class AcaoCriticaDTO implements Serializable {
         this.instrucaoAcao = instrucaoAcao;
     }
 
+    public Long getIdIndicadorCritica() {
+        return idIndicadorCritica;
+    }
+
+    public void setIdIndicadorCritica(Long idIndicadorCritica) {
+        this.idIndicadorCritica = idIndicadorCritica;
+    }
+
     public ZonedDateTime getCriadoEm() {
         return criadoEm;
     }
@@ -94,6 +107,14 @@ public class AcaoCriticaDTO implements Serializable {
 
     public void setAtualizadoEm(ZonedDateTime atualizadoEm) {
         this.atualizadoEm = atualizadoEm;
+    }
+
+    public Boolean getIsNotificado() {
+        return isNotificado;
+    }
+
+    public void setIsNotificado(Boolean isNotificado) {
+        this.isNotificado = isNotificado;
     }
 
     public IndicadorCriticaDTO getIndicadorCritica() {
@@ -135,8 +156,10 @@ public class AcaoCriticaDTO implements Serializable {
             ", idResponsavel=" + getIdResponsavel() +
             ", dataAcao='" + getDataAcao() + "'" +
             ", instrucaoAcao='" + getInstrucaoAcao() + "'" +
+            ", idIndicadorCritica=" + getIdIndicadorCritica() +
             ", criadoEm='" + getCriadoEm() + "'" +
             ", atualizadoEm='" + getAtualizadoEm() + "'" +
+            ", isNotificado='" + getIsNotificado() + "'" +
             ", indicadorCritica=" + getIndicadorCritica() +
             "}";
     }

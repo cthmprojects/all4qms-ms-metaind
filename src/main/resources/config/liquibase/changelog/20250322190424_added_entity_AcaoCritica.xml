@@ -11,7 +11,7 @@
     -->
     <changeSet id="20250322190424-1" author="jhipster">
         <createTable tableName="acao_critica">
-            <column name="id" type="bigint" autoIncrement="true">
+            <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="acao_critica" type="varchar(4000)">
@@ -29,10 +29,16 @@
             <column name="instrucao_acao" type="varchar(4000)">
                 <constraints nullable="true" />
             </column>
+            <column name="id_indicador_critica" type="bigint">
+                <constraints nullable="false" />
+            </column>
             <column name="criado_em" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>
             <column name="atualizado_em" type="${datetimeType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="is_notificado" type="boolean">
                 <constraints nullable="true" />
             </column>
             <column name="indicador_critica_id" type="bigint">
@@ -69,6 +75,7 @@
             <column name="id_indicador_critica" type="numeric"/>
             <column name="criado_em" type="date"/>
             <column name="atualizado_em" type="date"/>
+            <column name="is_notificado" type="boolean"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

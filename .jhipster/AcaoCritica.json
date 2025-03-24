@@ -43,6 +43,11 @@
     {
       "fieldName": "atualizadoEm",
       "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "isNotificado",
+      "fieldType": "Boolean",
+      "fieldValidateRules": []
     }
   ],
   "jpaMetamodelFiltering": false,
