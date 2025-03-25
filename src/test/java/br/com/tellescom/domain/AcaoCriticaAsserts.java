@@ -1,6 +1,5 @@
 package br.com.tellescom.domain;
 
-import static br.com.tellescom.domain.AssertUtils.zonedDataTimeSameInstant;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AcaoCriticaAsserts {
@@ -55,12 +54,8 @@ public class AcaoCriticaAsserts {
             .satisfies(e -> assertThat(e.getInstrucaoAcao()).as("check instrucaoAcao").isEqualTo(actual.getInstrucaoAcao()))
             .satisfies(e -> assertThat(e.getIdIndicadorCritica()).as("check idIndicadorCritica").isEqualTo(actual.getIdIndicadorCritica()))
             .satisfies(e ->
-                assertThat(e.getCriadoEm()).as("check criadoEm").usingComparator(zonedDataTimeSameInstant).isEqualTo(actual.getCriadoEm())
-            )
-            .satisfies(e ->
                 assertThat(e.getAtualizadoEm())
                     .as("check atualizadoEm")
-                    .usingComparator(zonedDataTimeSameInstant)
                     .isEqualTo(actual.getAtualizadoEm())
             )
             .satisfies(e -> assertThat(e.getIsNotificado()).as("check isNotificado").isEqualTo(actual.getIsNotificado()));
