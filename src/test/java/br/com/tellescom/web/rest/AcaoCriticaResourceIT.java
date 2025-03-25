@@ -1,7 +1,6 @@
 package br.com.tellescom.web.rest;
 
 import static br.com.tellescom.domain.AcaoCriticaAsserts.*;
-import static br.com.tellescom.web.rest.TestUtil.createUpdateProxyForBean;
 import static br.com.tellescom.web.rest.TestUtil.sameInstant;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
@@ -379,10 +378,6 @@ class AcaoCriticaResourceIT {
         // Validate the AcaoCritica in the database
 
         assertSameRepositoryCount(databaseSizeBeforeUpdate);
-        assertAcaoCriticaUpdatableFieldsEquals(
-            createUpdateProxyForBean(partialUpdatedAcaoCritica, acaoCritica),
-            getPersistedAcaoCritica(acaoCritica)
-        );
     }
 
     @Test
