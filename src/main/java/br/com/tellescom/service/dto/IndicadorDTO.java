@@ -2,6 +2,8 @@ package br.com.tellescom.service.dto;
 
 import br.com.tellescom.domain.enumeration.EnumTendencia;
 import br.com.tellescom.domain.enumeration.EnumUnidadeMedida;
+import jakarta.persistence.Column;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -26,6 +28,14 @@ public class IndicadorDTO implements Serializable {
     private Integer idProcesso;
 
     private Integer idMetaIndicador;
+
+    private String cargoResponsavel;
+
+    private String fonteDeDados;
+
+    private String prazoMaxApuracao;
+
+    private String formacaoIndice;
 
     public Long getId() {
         return id;
@@ -91,6 +101,38 @@ public class IndicadorDTO implements Serializable {
         this.idMetaIndicador = idMetaIndicador;
     }
 
+    public String getCargoResponsavel() {
+        return cargoResponsavel;
+    }
+
+    public void setCargoResponsavel(String cargoResponsavel) {
+        this.cargoResponsavel = cargoResponsavel;
+    }
+
+    public String getFonteDeDados() {
+        return fonteDeDados;
+    }
+
+    public void setFonteDeDados(String fonteDeDados) {
+        this.fonteDeDados = fonteDeDados;
+    }
+
+    public String getPrazoMaxApuracao() {
+        return prazoMaxApuracao;
+    }
+
+    public void setPrazoMaxApuracao(String prazoMaxApuracao) {
+        this.prazoMaxApuracao = prazoMaxApuracao;
+    }
+
+    public String getFormacaoIndice() {
+        return formacaoIndice;
+    }
+
+    public void setFormacaoIndice(String formacaoIndice) {
+        this.formacaoIndice = formacaoIndice;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -124,6 +166,10 @@ public class IndicadorDTO implements Serializable {
             ", tendencia='" + getTendencia() + "'" +
             ", idProcesso=" + getIdProcesso() +
             ", idMetaIndicador=" + getIdMetaIndicador() +
+            ", cargoResponsavel='" + getCargoResponsavel() + "'" +
+            ", fonteDados='" + getFonteDeDados() + "'" +
+            ", prazoMaxApuracao='" + getPrazoMaxApuracao() + "'" +
+            ", formacaoIndice='" + getFormacaoIndice() + "'" +
             "}";
     }
 }

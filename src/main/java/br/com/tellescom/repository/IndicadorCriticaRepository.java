@@ -1,11 +1,9 @@
 package br.com.tellescom.repository;
 
 import br.com.tellescom.domain.IndicadorCritica;
-import br.com.tellescom.service.dto.IndicadorCriticaDTO;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
-import java.util.Collection;
 import java.util.List;
 
 /**

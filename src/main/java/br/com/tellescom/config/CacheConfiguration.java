@@ -59,6 +59,8 @@ public class CacheConfiguration {
             createCache(cm, br.com.tellescom.domain.MetaResultado.class.getName());
             createCache(cm, br.com.tellescom.domain.MetaResultado.class.getName() + ".anexos");
             createCache(cm, br.com.tellescom.domain.IndicadorCritica.class.getName());
+            createCache(cm, br.com.tellescom.domain.IndicadorCritica.class.getName() + ".acaoCriticas");
+            createCache(cm, br.com.tellescom.domain.AcaoCritica.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

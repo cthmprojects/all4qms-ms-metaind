@@ -4,9 +4,11 @@ import br.com.tellescom.domain.enumeration.EnumTendencia;
 import br.com.tellescom.domain.enumeration.EnumUnidadeMedida;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -55,8 +57,18 @@ public class Indicador implements Serializable {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "indicador")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "indicador" }, allowSetters = true)
+    @JsonIgnoreProperties(value = {"indicador"}, allowSetters = true)
     private Set<IndicadorMeta> indicadorMetas = new HashSet<>();
+
+    @Column(name = "cargo_responsavel")
+    private String cargoResponsavel;
+    @Column(name = "fonte_dados")
+    private String fonteDeDados;
+    @Column(name = "prazo_apuracao")
+    private String prazoMaxApuracao;
+    @Column(name = "formacao_indice")
+    private String formacaoIndice;
+
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -195,6 +207,58 @@ public class Indicador implements Serializable {
         return this;
     }
 
+    public String getCargoResponsavel() {
+        return cargoResponsavel;
+    }
+
+    public Indicador cargoResponsavel(String cargoResponsavel) {
+        this.setCargoResponsavel(cargoResponsavel);
+        return this;
+    }
+
+    public void setCargoResponsavel(String cargoResponsavel) {
+        this.cargoResponsavel = cargoResponsavel;
+    }
+
+    public String getFonteDeDados() {
+        return fonteDeDados;
+    }
+
+    public Indicador fonteDeDados(String fonteDeDados) {
+        this.setFonteDeDados(fonteDeDados);
+        return this;
+    }
+
+    public void setFonteDeDados(String fonteDeDados) {
+        this.fonteDeDados = fonteDeDados;
+    }
+
+    public String getPrazoMaxApuracao() {
+        return prazoMaxApuracao;
+    }
+
+    public Indicador prazoMaxApuracao(String prazoMaxApuracao) {
+        this.setPrazoMaxApuracao(prazoMaxApuracao);
+        return this;
+    }
+
+    public void setPrazoMaxApuracao(String prazoMaxApuracao) {
+        this.prazoMaxApuracao = prazoMaxApuracao;
+    }
+
+    public String getFormacaoIndice() {
+        return formacaoIndice;
+    }
+
+    public Indicador formacaoIndice(String formacaoIndice) {
+        this.setFormacaoIndice(formacaoIndice);
+        return this;
+    }
+
+    public void setFormacaoIndice(String formacaoIndice) {
+        this.formacaoIndice = formacaoIndice;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -226,6 +290,10 @@ public class Indicador implements Serializable {
             ", tendencia='" + getTendencia() + "'" +
             ", idProcesso=" + getIdProcesso() +
             ", idMetaIndicador=" + getIdMetaIndicador() +
+            ", cargoResponsavel='" + getCargoResponsavel() + "'" +
+            ", fonteDados='" + getFonteDeDados() + "'" +
+            ", prazoMaxApuracao='" + getPrazoMaxApuracao() + "'" +
+            ", formacaoIndice='" + getFormacaoIndice() + "'" +
             "}";
     }
 }
