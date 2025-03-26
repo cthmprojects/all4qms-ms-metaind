@@ -168,4 +168,16 @@ public class AcaoCriticaResource {
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
             .build();
     }
+
+    @PostMapping("/salva-lote")
+    public ResponseEntity<List<AcaoCriticaDTO>> salvaAcaoCriticaEmLote(@RequestBody List<AcaoCriticaDTO> request){
+        LOG.debug("REST request para salvar AcaoCritica em Lote, {}", request);
+        return ResponseEntity.ok(acaoCriticaService.salvaAcaoCriticaEmLote(request));
+    }
+
+    @PostMapping("/atualiza-lote")
+    public ResponseEntity<List<AcaoCriticaDTO>> atualizaAcaoCriticaEmLote(@RequestBody List<AcaoCriticaDTO> request){
+        LOG.debug("REST request para salvar AcaoCritica em Lote, {}", request);
+        return ResponseEntity.ok(acaoCriticaService.atualizaAcaoCriticaEmLote(request));
+    }
 }
