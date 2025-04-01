@@ -120,6 +120,7 @@ public class IndicadorCriticaService {
      */
     public void delete(Long id) {
         LOG.debug("Request to delete IndicadorCritica : {}", id);
+        acaoCriticaService.findAllByIndicadorCritica(id).forEach(acaoCriticaDTO ->  acaoCriticaService.delete(acaoCriticaDTO.getId()));
         indicadorCriticaRepository.deleteById(id);
     }
 

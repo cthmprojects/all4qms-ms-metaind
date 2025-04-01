@@ -37,6 +37,8 @@ public class IndicadorDTO implements Serializable {
 
     private String formacaoIndice;
 
+    private Boolean isCancelado;
+
     public Long getId() {
         return id;
     }
@@ -133,6 +135,14 @@ public class IndicadorDTO implements Serializable {
         this.formacaoIndice = formacaoIndice;
     }
 
+    public Boolean getIsCancelado() {
+        return isCancelado;
+    }
+
+    public void setIsCancelado(Boolean cancelado) {
+        isCancelado = cancelado;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -170,6 +180,7 @@ public class IndicadorDTO implements Serializable {
             ", fonteDados='" + getFonteDeDados() + "'" +
             ", prazoMaxApuracao='" + getPrazoMaxApuracao() + "'" +
             ", formacaoIndice='" + getFormacaoIndice() + "'" +
+            ", isCancelado='" + getIsCancelado() + "'" +
             "}";
     }
 }

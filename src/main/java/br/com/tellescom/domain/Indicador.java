@@ -62,12 +62,18 @@ public class Indicador implements Serializable {
 
     @Column(name = "cargo_responsavel")
     private String cargoResponsavel;
+
     @Column(name = "fonte_dados")
     private String fonteDeDados;
+
     @Column(name = "prazo_apuracao")
     private String prazoMaxApuracao;
+
     @Column(name = "formacao_indice")
     private String formacaoIndice;
+
+    @Column(name = "is_cancelado")
+    private Boolean isCancelado;
 
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -259,6 +265,19 @@ public class Indicador implements Serializable {
         this.formacaoIndice = formacaoIndice;
     }
 
+    public Boolean getIsCancelado() {
+        return isCancelado;
+    }
+
+    public Indicador isCancelado(Boolean isCancelado){
+        this.setIsCancelado(isCancelado);
+        return this;
+    }
+
+    public void setIsCancelado(Boolean cancelado) {
+        isCancelado = cancelado;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -294,6 +313,7 @@ public class Indicador implements Serializable {
             ", fonteDados='" + getFonteDeDados() + "'" +
             ", prazoMaxApuracao='" + getPrazoMaxApuracao() + "'" +
             ", formacaoIndice='" + getFormacaoIndice() + "'" +
+            ", isCancelado='" + getIsCancelado() + "'" +
             "}";
     }
 }

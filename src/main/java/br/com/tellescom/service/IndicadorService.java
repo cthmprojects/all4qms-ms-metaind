@@ -1,12 +1,14 @@
 package br.com.tellescom.service;
 
 import br.com.tellescom.domain.Indicador;
+import br.com.tellescom.domain.IndicadorCritica;
 import br.com.tellescom.domain.IndicadorMeta;
 import br.com.tellescom.domain.enumeration.EnumTemporal;
 import br.com.tellescom.domain.request.GraficoIndicadorRequest;
 import br.com.tellescom.domain.response.graficos.*;
 import br.com.tellescom.repository.IndicadorMetaRepository;
 import br.com.tellescom.repository.IndicadorRepository;
+import br.com.tellescom.service.dto.IndicadorCriticaDTO;
 import br.com.tellescom.service.dto.IndicadorDTO;
 import br.com.tellescom.service.mapper.IndicadorMapper;
 import org.slf4j.Logger;
@@ -17,6 +19,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 /**
@@ -30,15 +34,20 @@ public class IndicadorService {
 
     private final IndicadorRepository indicadorRepository;
 
-
     private final IndicadorMetaRepository indicadorMetaRepository;
 
     private final IndicadorMapper indicadorMapper;
 
-    public IndicadorService(IndicadorRepository indicadorRepository, IndicadorMetaRepository indicadorMetaRepository, IndicadorMapper indicadorMapper) {
+    private final IndicadorMetaService indicadorMetaService;
+
+    private final IndicadorCriticaService indicadorCriticaService;
+
+    public IndicadorService(IndicadorRepository indicadorRepository, IndicadorMetaRepository indicadorMetaRepository, IndicadorMapper indicadorMapper, IndicadorMetaService indicadorMetaService, IndicadorCriticaService indicadorCriticaService) {
         this.indicadorRepository = indicadorRepository;
         this.indicadorMetaRepository = indicadorMetaRepository;
         this.indicadorMapper = indicadorMapper;
+        this.indicadorMetaService = indicadorMetaService;
+        this.indicadorCriticaService = indicadorCriticaService;
     }
 
     /**
@@ -118,7 +127,13 @@ public class IndicadorService {
      */
     public void delete(Long id) {
         log.debug("Request to delete Indicador : {}", id);
-        indicadorRepository.deleteById(id);
+        Indicador indicador = indicadorRepository.findById(id).orElse(null);
+        if(indicador != null){
+            List<IndicadorCriticaDTO> indicadorCriticaDTOList = indicadorCriticaService.getAllByIdIndicadorMeta(indicador.getIdMetaIndicador().longValue());
+            indicadorCriticaDTOList.forEach(item -> indicadorCriticaService.delete(item.getId()));
+            indicadorMetaService.delete(indicador.getIdMetaIndicador().longValue());
+            indicadorRepository.deleteById(id);
+        }
     }
 
     public GraficoIndicadorResponse graficoMetasPorProcesso(GraficoIndicadorRequest request) {
@@ -198,13 +213,12 @@ public class IndicadorService {
             for (int i = 0; i < dividendo; i++) {
 
 
-
             }
 
         }
 
 
-            return qualidadeProducao;
+        return qualidadeProducao;
     }
 
     public GraficoIndicadorResponse graficoPreenchimentoIndicadores(GraficoIndicadorRequest request) {
@@ -312,5 +326,16 @@ public class IndicadorService {
 
 
         return comparacaoPeriodos;
+    }
+
+    public IndicadorDTO cancelarIndicador(Long id) {
+        return indicadorRepository.findById(id)
+            .map(indicador -> {
+                indicador.setIsCancelado(true);
+                IndicadorDTO indicadorDTO = indicadorMapper.toDto(indicador);
+                return partialUpdate(indicadorDTO)
+                    .orElseThrow(() -> new RuntimeException("Falha ao tentar cancelar indicador"));
+            })
+            .orElseThrow(() -> new NoSuchElementException("Indicador não encontrado com ID: " + id));
     }
 }

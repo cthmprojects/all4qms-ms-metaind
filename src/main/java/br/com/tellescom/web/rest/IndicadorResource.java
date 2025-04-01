@@ -178,4 +178,10 @@ public class IndicadorResource {
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
             .build();
     }
+
+    @PutMapping("/cancelar/{id}")
+    public ResponseEntity<IndicadorDTO> cancelarIndicador(@PathVariable("id") Long id){
+        log.debug("REST request to set Indicator isCancelado: {}", id);
+        return  ResponseEntity.ok(indicadorService.cancelarIndicador(id));
+    }
 }
