@@ -28,9 +28,9 @@ public interface MetaResponseRepository extends JpaRepository<MetaResponse, Long
             "mr.meta_id = m.id AND " +
             "mr.lancado_em = ( SELECT MAX(lancado_em) FROM meta_resultado WHERE meta_id = m.id ) " +
             "WHERE m.fl_ativo <> 0 " +
-            "AND ((:mes IS NULL AND :ano IS NULL) OR  (mr.lancado_em IS NOT NULL " +
-            "AND (COALESCE(TO_CHAR(mr.lancado_em, 'MM'), '00') = COALESCE(LPAD(:mes, 2, '0'), TO_CHAR(mr.lancado_em, 'MM')) or mr.lancado_em IS NULL ) " +
-            "AND (COALESCE(TO_CHAR(mr.lancado_em, 'YYYY'), '0000') = COALESCE(:ano, TO_CHAR(mr.lancado_em, 'YYYY'))  or mr.lancado_em IS NULL ))) " +
+            "AND ((:mes IS NULL AND :ano IS NULL) OR  (mr.periodo IS NOT NULL " +
+            "AND (COALESCE(TO_CHAR(mr.periodo, 'MM'), '00') = COALESCE(LPAD(:mes, 2, '0'), TO_CHAR(mr.periodo, 'MM')) or mr.periodo IS NULL ) " +
+            "AND (COALESCE(TO_CHAR(mr.periodo, 'YYYY'), '0000') = COALESCE(:ano, TO_CHAR(mr.periodo, 'YYYY'))  or mr.periodo IS NULL ))) " +
             "AND ((:parcial IS NULL AND :metaAtingida IS NULL) OR (mr.id IS NOT NULL " +
             "AND (COALESCE(:parcial, mr.parcial) = mr.parcial or mr.parcial is NULL )   " +
             "AND (COALESCE(:metaAtingida, mr.meta_atingida) = mr.meta_atingida or mr.meta_atingida is NULL))) " +
