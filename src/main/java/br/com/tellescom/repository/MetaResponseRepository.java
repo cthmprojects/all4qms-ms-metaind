@@ -25,8 +25,7 @@ public interface MetaResponseRepository extends JpaRepository<MetaResponse, Long
             "m.monitoramento_controle " +
             "FROM meta m " +
             "LEFT JOIN meta_resultado mr ON " +
-            "mr.meta_id = m.id AND " +
-            "mr.periodo = ( SELECT MAX(periodo) FROM meta_resultado WHERE meta_id = m.id ) " +
+            "mr.meta_id = m.id " +
             "WHERE m.fl_ativo <> 0 " +
             "AND ((:mes IS NULL AND :ano IS NULL) OR  (mr.periodo IS NOT NULL " +
             "AND (COALESCE(TO_CHAR(mr.periodo, 'MM'), '00') = COALESCE(LPAD(:mes, 2, '0'), TO_CHAR(mr.periodo, 'MM')) or mr.periodo IS NULL ) " +
