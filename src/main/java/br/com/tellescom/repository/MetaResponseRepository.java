@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MetaResponseRepository extends JpaRepository<MetaResponse, Long> {
     @Query(
-        value = "SELECT " +
+        value = "SELECT DISTINCT " +
             "m.id, " +
             "m.meta_objetivo_id, " +
             "mr.id as meta_resultado_id, " +
@@ -24,7 +24,7 @@ public interface MetaResponseRepository extends JpaRepository<MetaResponse, Long
             "m.fl_ativo," +
             "m.monitoramento_controle " +
             "FROM meta m " +
-            "LEFT JOIN meta_resultado mr ON " +
+            "LEFT JOIN (SELECT DISTINCT ON (meta_id) * FROM meta_resultado ORDER BY meta_id, id DESC) mr ON " +
             "mr.meta_id = m.id " +
             "WHERE m.fl_ativo <> 0 " +
             "AND ((:mes IS NULL AND :ano IS NULL) OR  (mr.periodo IS NOT NULL " +

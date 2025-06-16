@@ -3,8 +3,10 @@ package br.com.tellescom.domain.response;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,6 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name = "meta")
 public class MetaResponse implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -47,4 +50,16 @@ public class MetaResponse implements Serializable {
     @Column(name = "fl_ativo")
     private Integer flAtivo;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof MetaResponse)) return false;
+        MetaResponse that = (MetaResponse) o;
+        return Objects.equals(idMeta, that.idMeta);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idMeta);
+    }
 }
