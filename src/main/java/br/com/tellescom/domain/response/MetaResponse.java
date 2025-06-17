@@ -44,6 +44,9 @@ public class MetaResponse implements Serializable {
     @Column(name = "meta_atingida")
     private Boolean metaAtingida;
 
+    @Column(name = "resultado_final")
+    private Boolean resultadoFinal;
+
     @Column(name = "lancado_em")
     private Instant lancadoEm;
 

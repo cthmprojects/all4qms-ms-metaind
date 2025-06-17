@@ -19,6 +19,8 @@ public class MetaResultadoDTO implements Serializable {
 
     private Boolean metaAtingida;
 
+    private Boolean resultadoFinal;
+
     private Instant periodo;
 
     @Size(max = 4000)
@@ -51,6 +53,14 @@ public class MetaResultadoDTO implements Serializable {
 
     public void setParcial(Boolean parcial) {
         this.parcial = parcial;
+    }
+
+    public Boolean getResultadoFinal() {
+        return resultadoFinal;
+    }
+
+    public void setResultadoFinal(Boolean resultadoFinal) {
+        this.resultadoFinal = resultadoFinal;
     }
 
     public Boolean getMetaAtingida() {
@@ -121,6 +131,7 @@ public class MetaResultadoDTO implements Serializable {
             "id=" + getId() +
             ", lancadoEm='" + getLancadoEm() + "'" +
             ", parcial='" + getParcial() + "'" +
+            ", resultadoFinal='" + getResultadoFinal() + "'" +
             ", metaAtingida='" + getMetaAtingida() + "'" +
             ", periodo='" + getPeriodo() + "'" +
             ", avaliacao='" + getAvaliacao() + "'" +

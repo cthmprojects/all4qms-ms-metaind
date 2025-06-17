@@ -141,13 +141,15 @@ public class MetaService {
     public Page<MetaResponse> findByFiltro(MetaFilterRequest filtro, Pageable pageable) {
         Boolean metaParcial = null;
         Boolean metaAtingida = null;
+        Boolean resultadoFinal = null;
 
         if (filtro == null) {
             filtro = new MetaFilterRequest();
         }
         if (filtro.getSituacao() != null) {
-            metaAtingida = (filtro.getSituacao().equals("Finalizado")) ? true : null;
-            metaParcial = (filtro.getSituacao().equals("Parcial")) ? true : null;
+            metaAtingida = (filtro.getSituacao().equals("META ATINGIDA")) ? true : null;
+            metaParcial = (filtro.getSituacao().equals("PARCIAL")) ? true : null;
+            resultadoFinal = (filtro.getSituacao().equals("RESULTADO FINAL")) ? true : null;
         }
         return metaResponseRepository.getAllMetaByFilter(
             filtro.getAno(),
@@ -156,6 +158,7 @@ public class MetaService {
             filtro.getPesquisa(),
             metaAtingida,
             metaParcial,
+            resultadoFinal,
             pageable
         );
     }

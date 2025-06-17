@@ -39,6 +39,9 @@ public class MetaResultado implements Serializable {
     @Column(name = "meta_atingida")
     private Boolean metaAtingida;
 
+    @Column(name = "resultado_final")
+    private Boolean resultadoFinal;
+
     @Column(name = "periodo")
     private Instant periodo;
 
@@ -196,6 +199,19 @@ public class MetaResultado implements Serializable {
         return this;
     }
 
+    public Boolean getResultadoFinal() {
+        return this.resultadoFinal;
+    }
+
+    public MetaResultado resultadoFinal(Boolean resultadoFinal) {
+        this.setResultadoFinal(resultadoFinal);
+        return this;
+    }
+
+    public void setResultadoFinal(Boolean resultadoFinal) {
+        this.resultadoFinal = resultadoFinal;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -223,6 +239,7 @@ public class MetaResultado implements Serializable {
             ", lancadoEm='" + getLancadoEm() + "'" +
             ", parcial='" + getParcial() + "'" +
             ", metaAtingida='" + getMetaAtingida() + "'" +
+            ", resultadoFinal='" + getResultadoFinal() + "'" +
             ", periodo='" + getPeriodo() + "'" +
             ", avaliacao='" + getAvaliacao() + "'" +
             ", analise='" + getAnalise() + "'" +
