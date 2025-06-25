@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="METAIND CLOUDFLARE" type="Application" factoryName="Application">
     <envs>
-      <env name="QMS_REGISTRY_HOST" value="all4qms-registry.cthmprojetos.com" />
+      <env name="QMS_REGISTRY_HOST" value="all4qms-registry.vdeveloper.com.br" />
       <env name="QMS_REGISTRY_PROTOCOLO" value="https" />
     </envs>
     <option name="MAIN_CLASS_NAME" value="br.com.tellescom.All4QmsMsMetaIndApp" />

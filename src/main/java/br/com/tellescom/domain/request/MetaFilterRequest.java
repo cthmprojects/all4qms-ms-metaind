@@ -14,6 +14,6 @@ public class MetaFilterRequest {
     private Long idProcesso;
     private String ano;
     private String mes;
-    private String situacao; // F = Finalizado; P = Parcial
+    private String situacao; // F = Finalizado; P = Parcial; R = Resultado Final
     private String pesquisa;
 }

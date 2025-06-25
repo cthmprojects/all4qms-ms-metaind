@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MetaResponseRepository extends JpaRepository<MetaResponse, Long> {
     @Query(
-        value = "SELECT " +
+        value = "SELECT DISTINCT " +
             "m.id, " +
             "m.meta_objetivo_id, " +
             "mr.id as meta_resultado_id, " +
@@ -20,19 +20,21 @@ public interface MetaResponseRepository extends JpaRepository<MetaResponse, Long
             "mr.analise, " +
             "mr.parcial, " +
             "mr.meta_atingida, " +
+            "mr.resultado_final, " +
             "mr.lancado_em, " +
             "m.fl_ativo," +
             "m.monitoramento_controle " +
             "FROM meta m " +
-            "LEFT JOIN meta_resultado mr ON " +
+            "LEFT JOIN (SELECT DISTINCT ON (meta_id) * FROM meta_resultado ORDER BY meta_id, id DESC) mr ON " +
             "mr.meta_id = m.id " +
             "WHERE m.fl_ativo <> 0 " +
             "AND ((:mes IS NULL AND :ano IS NULL) OR  (mr.periodo IS NOT NULL " +
             "AND (COALESCE(TO_CHAR(mr.periodo, 'MM'), '00') = COALESCE(LPAD(:mes, 2, '0'), TO_CHAR(mr.periodo, 'MM')) or mr.periodo IS NULL ) " +
             "AND (COALESCE(TO_CHAR(mr.periodo, 'YYYY'), '0000') = COALESCE(:ano, TO_CHAR(mr.periodo, 'YYYY'))  or mr.periodo IS NULL ))) " +
-            "AND ((:parcial IS NULL AND :metaAtingida IS NULL) OR (mr.id IS NOT NULL " +
+            "AND ((:parcial IS NULL AND :metaAtingida IS NULL AND :resultadoFinal IS NULL) OR (mr.id IS NOT NULL " +
             "AND (COALESCE(:parcial, mr.parcial) = mr.parcial or mr.parcial is NULL )   " +
-            "AND (COALESCE(:metaAtingida, mr.meta_atingida) = mr.meta_atingida or mr.meta_atingida is NULL))) " +
+            "AND (COALESCE(:metaAtingida, mr.meta_atingida) = mr.meta_atingida or mr.meta_atingida is NULL) " +
+            "AND (COALESCE(:resultadoFinal, mr.resultado_final) = mr.resultado_final or mr.resultado_final is NULL))) " +
             "AND (COALESCE(:idProcesso, -1) = -1 OR m.id_processo = :idProcesso)   " +
             "AND (:pesquisa IS NULL " +
             "OR m.descricao ILIKE '%' || :pesquisa || '%' " +
@@ -48,6 +50,7 @@ public interface MetaResponseRepository extends JpaRepository<MetaResponse, Long
         @Param("pesquisa") String pesquisa,
         @Param("metaAtingida") Boolean metaAtingida,
         @Param("parcial") Boolean metaParcial,
+        @Param("resultadoFinal") Boolean resultadoFinal,
         Pageable pageable
     );
 
