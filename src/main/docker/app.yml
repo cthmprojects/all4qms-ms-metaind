@@ -12,9 +12,9 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://all4qmsmsgateway-postgresql:5432/all4qmsMsGateway
       - SPRING_LIQUIBASE_URL=jdbc:postgresql://all4qmsmsgateway-postgresql:5432/all4qmsMsGateway
       - JHIPSTER_SLEEP=30
-      - QMS_REGISTRY_HOST=all4qms-registry.cthmprojetos.com
+      - QMS_REGISTRY_HOST=all4qms-registry.vdeveloper.com.br
       - QMS_REGISTRY_PROTOCOLO=https
-      - IA-HOST=https://all4qms-ia.cthmprojetos.com
+      - IA-HOST=https://all4qms-ia.vdeveloper.com.br
     healthcheck:
       test:
         - CMD
